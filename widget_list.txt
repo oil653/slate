@@ -1,0 +1,10 @@
+home
+media
+workspaces
+power(batterty, power profile)
+notification
+date
+todo
+power
+weather
+metrics

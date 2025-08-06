@@ -10,5 +10,15 @@ import qs.components
 // You are free to use this just credit me
 
 ShellRoot{
+    id: root;
+    property bool configDebug: false; // if set to true the config will always be overwritten if the qs is loaded or reloaded
     Bar{}
+
+    Component.onCompleted: {
+        if (root.configDebug) {
+            console.log("configDebug enabled. Overwriting configs")
+            Config.adapterOverwrite();
+            Widgets.adapterOverwrite();
+        }
+    }
 }
