@@ -29,7 +29,7 @@ ShellRoot{
                 Rectangle{
                     anchors.fill: parent;
 
-                    color: Config.bgColor;
+                    color: Colors.background;
                     opacity: Config.opacity;
 
                     topLeftRadius: Config.radius;
@@ -58,7 +58,7 @@ ShellRoot{
                         }
                         Rectangle{ // Workspaces panel
                             id: wm;
-                            implicitHeight: parent.height;
+                            implicitHeight: parent.height - 2; // leaves some space between the top and the bottom of the bar and this
                             implicitWidth: Widgets.middlePanelWidth;
                             anchors.centerIn: parent;
                             color: "transparent";

@@ -6,10 +6,11 @@ import Quickshell.Io
 Singleton{
     property real height: adapter.height; // Panel height
     property real margin: adapter.margin // Panel margin from the side of the screens  
-    property string bgColor: adapter.bgColor; // Main background color
     property real opacity: adapter.opacity; // Opacity of the bar
     property real radius: adapter.radius; // Radius of the main bar
     property bool bottomRadius: adapter.bottomRadius; // If set to true the bottom sides will have radius applyed
+    
+    property bool minimalWorkspace: false; // Defines the mode of the workspace 
 
 
     function adapterReload(){
@@ -55,9 +56,8 @@ Singleton{
         JsonAdapter {
             id: adapter;
             property real height: 30;
-            property string bgColor: "#3f3b3b";
             property real margin: 30;
-            property real opacity: 0.6;
+            property real opacity: 1;
             property real radius: 15;
             property bool bottomRadius: true; // for dev;
         }
