@@ -1,10 +1,9 @@
 home
 media
-workspaces
+workspaces [✓]
 power(batterty, power profile)
 notification
-date
-todo
-power
+calendar todo
+clock
 weather
 metrics

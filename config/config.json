@@ -1,7 +1,9 @@
 {
     "bottomRadius": true,
     "height": 30,
+    "isWorkspacesPerMonitor": false,
     "margin": 30,
+    "minimalWorkspace": false,
     "opacity": 1,
     "radius": 15
 }

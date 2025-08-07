@@ -10,7 +10,8 @@ Singleton{
     property real radius: adapter.radius; // Radius of the main bar
     property bool bottomRadius: adapter.bottomRadius; // If set to true the bottom sides will have radius applyed
     
-    property bool minimalWorkspace: false; // Defines the mode of the workspace 
+    property bool minimalWorkspace: adapter.minimalWorkspace; // Defines the mode of the workspace 
+    property bool isWorkspacesPerMonitor: adapter.isWorkspacesPerMonitor // If false all open worksapces will show on all monitors
 
 
     function adapterReload(){
@@ -60,6 +61,8 @@ Singleton{
             property real opacity: 1;
             property real radius: 15;
             property bool bottomRadius: true; // for dev;
+            property bool minimalWorkspace: false;
+            property bool isWorkspacesPerMonitor: true;
         }
         
     }

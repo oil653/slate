@@ -8,10 +8,6 @@ import qs.widgets
 
 
 ShellRoot{
-    Component{
-        id: workspaceComponent
-        Workspace{}
-    }
     Variants{
         model: Quickshell.screens;
         delegate: Component{
@@ -26,6 +22,14 @@ ShellRoot{
                 color: "transparent";
 
 
+                Component{
+                    id: workspaceLoader;
+                    Workspace{
+                        implicitWidth: 100;
+                        implicitHeight: Config.height -2;
+                        currentMonitor: (Config.isWorkspacesPerMonitor) ? panelRoot.modelData.name : "";
+                    }
+                }
                 Rectangle{
                     anchors.fill: parent;
 
@@ -43,25 +47,34 @@ ShellRoot{
                         anchors.leftMargin: Config.radius;
                         anchors.rightMargin: Config.radius;
                         property real maxItemWidth: ((this.width - (2* Config.radius)) / 10) - Widgets.middlePanelWidth;
-                        Row{ //left side
-                            anchors.left: parent.left;  
-                            anchors.right: wm.left;  
-                            anchors.verticalCenter: parent.verticalCenter  
-                            Repeater{
-                                model: 5;
-                                WrapperRectangle {  
-                                    color: "white";  
-                                    implicitWidth: Math.min(child ? child.implicitWidth : 0, widgetLayout.maxItemWidth)  
-                                    implicitHeight: widgetLayout.height;
-                                }  
+                        Item{
+                            id:wl1;
+                            implicitHeight: parent.height;
+                            anchors.left: widgetLayout.left;
+                            property string config: Widgets.wl1;
+                            Loader{
+                                id: loader;
+                                anchors.centerIn: parent;
+                                active: true;
+                                sourceComponent: {
+                                    switch (wl1.config){
+                                        case "workspace":
+                                            return workspaceLoader;
+                                        default:
+                                            return null;
+                                    }
+                                }
+                                onLoaded: {
+                                    if (item) wl1.implicitWidth = item.implicitWidth;
+                                    else wl1.implicitWidth = 0;
+                                }
                             }
                         }
-                        Rectangle{ // Workspaces panel
+                        Item{ // Middle panel
                             id: wm;
                             implicitHeight: parent.height - 2; // leaves some space between the top and the bottom of the bar and this
                             implicitWidth: Widgets.middlePanelWidth;
                             anchors.centerIn: parent;
-                            color: "transparent";
                             Workspace{
                                 anchors.fill: parent;
                                 currentMonitor: panelRoot.modelData.name;

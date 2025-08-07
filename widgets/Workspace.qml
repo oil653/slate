@@ -5,14 +5,14 @@ import Quickshell.Widgets
 import Quickshell
 import qs.components
 
-// Widget for Sway and I3 worspaces
-// There is no internal positioning, have to be positioned from the caller
+// Widget for Sway and I3 workspaces
 
 
 Rectangle{
     id: root;
     color: "Transparent";
     required property string currentMonitor; // The caller passes the current monitor for sorting
+
 
     states: [
         State{
@@ -44,7 +44,7 @@ Rectangle{
             }
         }
     ]
-    state: "NORMAL"
+    state: (Config.minimalWorkspace) ? "MIN" : "NORMAL";
 
     Item{ // idk why i named this bg, but there must be some logic behind it
         id: bg;

@@ -4,19 +4,19 @@ import Quickshell
 import Quickshell.Io
 
 Singleton{
-    // The widget name on posiiton w* (or the middle in wm). For widget names refer to ../widget_list.txt
-    // Please only change in the ../config/widgets.json file
-    // Case sensitive
-    property string w1: adapter.w1; 
-    property string w2: adapter.w2; 
-    property string w3: adapter.w3; 
-    property string w4: adapter.w4; 
-    property string w5: adapter.w5; 
-    property string w6: adapter.w6; 
-    property string w7: adapter.w7; 
-    property string w8: adapter.w8; 
-    property string w9: adapter.w9; 
-    property string w10: adapter.w10;
+    // ../config/widgets.json
+    // a list of widgets is available in ../widget_list.txt
+    // Logic: w(widget) + l/m/f (left, middle, right) + slot number
+    // There are 8 slots on one side, and 3 in the middle or with middleSplit there are two. 
+    // For better examples visit the wiki (there is no wiki for now)
+    property string wl1: adapter.wl1; 
+    property string wl2: adapter.wl2; 
+    property string wl3: adapter.wl3; 
+    property string wl4: adapter.wl4; 
+    property string wl5: adapter.wl5; 
+    property string wl6: adapter.wl6; 
+    property string wl7: adapter.wl7; 
+    property string wl8: adapter.wl8; 
     property real middlePanelWidth: adapter.middlePanelWidth;
 
 
@@ -62,16 +62,14 @@ Singleton{
         
         JsonAdapter {
             id: adapter;
-            property string w1: ""; 
-            property string w2: ""; 
-            property string w3: ""; 
-            property string w4: ""; 
-            property string w5: ""; 
-            property string w6: ""; 
-            property string w7: ""; 
-            property string w8: ""; 
-            property string w9: ""; 
-            property string w10: "";
+            property string wl1: ""; 
+            property string wl2: ""; 
+            property string wl3: ""; 
+            property string wl4: ""; 
+            property string wl5: ""; 
+            property string wl6: ""; 
+            property string wl7: ""; 
+            property string wl8: ""; 
             property real middlePanelWidth: 300;            
         }
         
