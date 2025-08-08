@@ -3,7 +3,6 @@ media
 workspaces [✓]
 power(batterty, power profile)
 notification
-calendar todo
-clock
+clock [✓] popup: calendar, todo, reminders
 weather
 metrics

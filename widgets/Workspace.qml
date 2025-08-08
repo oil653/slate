@@ -122,7 +122,7 @@ Rectangle{
                     MouseArea{
                         anchors.fill: parent;
                         onClicked: {
-                            parent.model.activate(parent.model.name);
+                            parent.model.activate();
                         }
                     }
                     

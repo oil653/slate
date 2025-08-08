@@ -5,9 +5,11 @@ import Quickshell
 import qs
 import qs.components
 import qs.widgets
+import qs.modules
 
 
 ShellRoot{
+    id: root;
     Variants{
         model: Quickshell.screens;
         delegate: Component{
@@ -30,6 +32,14 @@ ShellRoot{
                         currentMonitor: (Config.isWorkspacesPerMonitor) ? panelRoot.modelData.name : "";
                     }
                 }
+                Component{
+                    id: clockLoader;
+                    Clock{
+                        // implicitWidth: 200;
+                        implicitHeight: Config.height -2;
+                        anchors.centerIn: parent;
+                    }
+                }
                 Rectangle{
                     anchors.fill: parent;
 
@@ -46,53 +56,83 @@ ShellRoot{
                         anchors.fill: parent;
                         anchors.leftMargin: Config.radius;
                         anchors.rightMargin: Config.radius;
-                        property real maxItemWidth: ((this.width - (2* Config.radius)) / 10) - Widgets.middlePanelWidth;
-                        Item{
-                            id:wl1;
-                            implicitHeight: parent.height;
-                            anchors.left: widgetLayout.left;
-                            property string config: Widgets.wl1;
-                            Loader{
-                                id: loader;
-                                anchors.centerIn: parent;
-                                active: true;
-                                sourceComponent: {
-                                    switch (wl1.config){
-                                        case "workspace":
-                                            return workspaceLoader;
-                                        default:
-                                            return null;
+                        function getCurrentWidget(x) { // Returns the corresponding loader from the passed in string
+                            switch (x) {
+                                case "workspace": return workspaceLoader;
+                                case "clock": return clockLoader;
+                                default: return null;
+                            }
+                        }
+                        Row { // Left panel
+                            id: leftPanel;
+                            spacing: 0;
+                            height: parent.height;
+                            anchors.left: parent.left;
+                            Repeater {
+                                model: Widgets.leftWidgetList;
+                                delegate: Item {
+                                    id: dynamicItem;
+                                    implicitHeight: widgetLayout.height;
+                                    implicitWidth: loader.item ? loader.item.implicitWidth : 0;
+                                    property string widgetName: modelData;
+                                    Loader {
+                                        id: loader;
+                                        anchors.centerIn: parent;
+                                        active: widgetName !== "";
+                                        sourceComponent: widgetLayout.getCurrentWidget(widgetName);
                                     }
                                 }
-                                onLoaded: {
-                                    if (item) wl1.implicitWidth = item.implicitWidth;
-                                    else wl1.implicitWidth = 0;
+                            }
+                        }
+                        Row { // Middle panel
+                            id: middlePanel;
+                            spacing: 0;
+                            height: parent.height;
+                            anchors.centerIn: parent;
+                            Repeater {
+                                model: Widgets.middleWidgetList;
+                                delegate: Item {
+                                    id: dynamicItem;
+                                    implicitHeight: widgetLayout.height;
+                                    implicitWidth: loader.item ? loader.item.implicitWidth : 0;
+                                    property string widgetName: modelData;
+                                    Loader {
+                                        id: loader;
+                                        anchors.centerIn: parent;
+                                        active: widgetName !== "";
+                                        sourceComponent: widgetLayout.getCurrentWidget(widgetName);
+                                    }
                                 }
                             }
                         }
-                        Item{ // Middle panel
-                            id: wm;
-                            implicitHeight: parent.height - 2; // leaves some space between the top and the bottom of the bar and this
-                            implicitWidth: Widgets.middlePanelWidth;
-                            anchors.centerIn: parent;
-                            Workspace{
-                                anchors.fill: parent;
-                                currentMonitor: panelRoot.modelData.name;
-                            }
-                        }
-                        Row{ //right side
-                            anchors.left: wm.right;
-                            anchors.right: parent.right; 
-                            anchors.verticalCenter: parent.verticalCenter 
-                            Repeater{
-                                model: 5;
-                                WrapperRectangle {  
-                                    color: "white";  
-                                    implicitWidth: Math.min(child ? child.implicitWidth : 0, widgetLayout.maxItemWidth)  
+                        Row { // Right panel
+                            id: rightPanel;
+                            spacing: 0;
+                            height: parent.height;
+                            anchors.right: parent.right;
+                            layoutDirection: Qt.RightToLeft;
+                            Repeater {
+                                model: Widgets.rightWidgetList;
+                                delegate: Item {
+                                    id: dynamicItem;
                                     implicitHeight: widgetLayout.height;
-                                }  
+                                    implicitWidth: loader.item ? loader.item.implicitWidth : 0;
+                                    property string widgetName: modelData;
+                                    Loader {
+                                        id: loader;
+                                        anchors.centerIn: parent;
+                                        active: widgetName !== "";
+                                        sourceComponent: widgetLayout.getCurrentWidget(widgetName);
+                                    }
+                                }
                             }
                         }
+                    }
+                }
+                LazyLoader{
+                    active: GlobalStates.calendarOpen;
+                    Calendar{
+
                     }
                 }
             }

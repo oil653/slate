@@ -1,2 +1,2 @@
-A maybe minimalistic and possibly stylis bar for sway. 
+A maybe minimalistic and possibly stylish bar for sway. 
 WORK IN PROGRESS

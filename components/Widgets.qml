@@ -5,27 +5,28 @@ import Quickshell.Io
 
 Singleton{
     // ../config/widgets.json
-    // a list of widgets is available in ../widget_list.txt
-    // Logic: w(widget) + l/m/f (left, middle, right) + slot number
-    // There are 8 slots on one side, and 3 in the middle or with middleSplit there are two. 
-    // For better examples visit the wiki (there is no wiki for now)
-    property string wl1: adapter.wl1; 
-    property string wl2: adapter.wl2; 
-    property string wl3: adapter.wl3; 
-    property string wl4: adapter.wl4; 
-    property string wl5: adapter.wl5; 
-    property string wl6: adapter.wl6; 
-    property string wl7: adapter.wl7; 
-    property string wl8: adapter.wl8; 
-    property real middlePanelWidth: adapter.middlePanelWidth;
+    property var leftWidgetList: [];
+    property var middleWidgetList: [];
+    property var rightWidgetList: [];
+    
+    Component.onCompleted: {
+        refresh();
+    }
+    onRefresh: {
+        leftWidgetList = adapter.leftWidgetList;
+        middleWidgetList = adapter.middleWidgetList;
+        rightWidgetList = adapter.rightWidgetList;
+    }
 
 
     function adapterReload(){
-        fileView.reload()
+        fileView.reload();
     }
     function adapterOverwrite(){
-        fileView.writeAdapter()
+        fileView.writeAdapter();
     }
+
+    signal refresh;
 
     FileView{
         id: fileView;
@@ -36,7 +37,8 @@ Singleton{
         
         onFileChanged: {
             reload();
-            console.log("Widget config file changed, reloading adapter")
+            refresh();
+            console.log("Widget config file changed, reloading adapter");
         }
         onAdapterUpdated: {
             writeAdapter();
@@ -62,15 +64,9 @@ Singleton{
         
         JsonAdapter {
             id: adapter;
-            property string wl1: ""; 
-            property string wl2: ""; 
-            property string wl3: ""; 
-            property string wl4: ""; 
-            property string wl5: ""; 
-            property string wl6: ""; 
-            property string wl7: ""; 
-            property string wl8: ""; 
-            property real middlePanelWidth: 300;            
+            property var leftWidgetList: [];
+            property var middleWidgetList: ["workspace"];
+            property var rightWidgetList: ["clock"];
         }
         
     }

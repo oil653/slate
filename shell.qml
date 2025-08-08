@@ -4,6 +4,8 @@ import QtQuick
 import Quickshell
 import qs
 import qs.components
+import qs.widgets
+import qs.modules
 
 
 // Hello there
@@ -17,9 +19,9 @@ ShellRoot{
     Component.onCompleted: {
         if (root.configDebug) {
             console.log("configDebug enabled. Overwriting configs")
-            Config.adapterOverwrite();
+            // Config.adapterOverwrite();
             Widgets.adapterOverwrite();
-            Colors.adapterOverwrite();
+            // Colors.adapterOverwrite();
         }
     }
 }

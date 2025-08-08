@@ -10,8 +10,12 @@ Singleton{
     property real radius: adapter.radius; // Radius of the main bar
     property bool bottomRadius: adapter.bottomRadius; // If set to true the bottom sides will have radius applyed
     
+    // Workspaces
     property bool minimalWorkspace: adapter.minimalWorkspace; // Defines the mode of the workspace 
     property bool isWorkspacesPerMonitor: adapter.isWorkspacesPerMonitor // If false all open worksapces will show on all monitors
+
+    // Clock
+    property string dateFormat: adapter.dateFormat;
 
 
     function adapterReload(){
@@ -63,6 +67,7 @@ Singleton{
             property bool bottomRadius: true; // for dev;
             property bool minimalWorkspace: false;
             property bool isWorkspacesPerMonitor: true;
+            property string dateFormat: "hh:mm <b>·</b> dddd, MMM d"; // Full list of format specifiers on wiki
         }
         
     }
