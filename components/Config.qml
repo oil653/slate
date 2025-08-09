@@ -28,7 +28,7 @@ Singleton{
 
     FileView{
         id: fileView;
-        path: "./config/config.json";
+        path: Quickshell.shellPath("config/config.json");
 
         watchChanges: true;
         preload: true;

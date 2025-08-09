@@ -31,7 +31,7 @@ Singleton{
 
     FileView{
         id: fileView;
-        path: "./config/widgets.json";
+        path: Quickshell.shellPath("config/widgets.json");
 
         watchChanges: true;
         preload: true;

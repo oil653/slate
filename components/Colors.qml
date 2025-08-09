@@ -27,7 +27,7 @@ Singleton{
 
     FileView{
         id: fileView;
-        path: "./config/colors.json";
+        path: Quickshell.shellPath("config/colors.json");
 
         watchChanges: true;
         preload: true;
