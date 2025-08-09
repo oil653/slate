@@ -6,5 +6,6 @@
     "margin": 30,
     "minimalWorkspace": false,
     "opacity": 1,
-    "radius": 15
+    "radius": 15,
+    "rowSpacing": 10
 }

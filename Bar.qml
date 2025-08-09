@@ -27,7 +27,7 @@ ShellRoot{
                 Component{
                     id: workspaceLoader;
                     Workspace{
-                        implicitWidth: 100;
+                        // implicitWidth: 100;
                         implicitHeight: Config.height -2;
                         currentMonitor: (Config.isWorkspacesPerMonitor) ? panelRoot.modelData.name : "";
                     }
@@ -63,9 +63,14 @@ ShellRoot{
                                 default: return null;
                             }
                         }
+                        function popupDebugPrint(){ // Prints all values from GlobalStates that relates to popups
+                            // console.log("leftPopup:", GlobalStates.leftPopup, "\n leftElementWidth", GlobalStates.leftElementWidth, "\n leftPopupCallerIndex", GlobalStates.leftPopupCallerIndex, "\n");
+                            // console.log("rightPopup:", GlobalStates.rightPopup, "\n rightElementWidth", GlobalStates.rightElementWidth, "\n rightPopupCallerIndex", GlobalStates.rightPopupCallerIndex, "\n");
+                            // console.log("middlePopup:", GlobalStates.middlePopup, "\n");
+                        }
                         Row { // Left panel
                             id: leftPanel;
-                            spacing: 0;
+                            spacing: Config.rowSpacing;
                             height: parent.height;
                             anchors.left: parent.left;
                             Repeater {
@@ -75,44 +80,37 @@ ShellRoot{
                                     implicitHeight: widgetLayout.height;
                                     implicitWidth: loader.item ? loader.item.implicitWidth : 0;
                                     property string widgetName: modelData;
-                                    property bool isFirst: (index === 0); // True if the first element in the row
                                     Loader {
                                         id: loader;
                                         anchors.centerIn: parent;
                                         active: widgetName !== "";
                                         sourceComponent: widgetLayout.getCurrentWidget(widgetName);
                                         MouseArea {
-                                            // I tried a lots of thing to get the relative position of the delegate to the bar but i couldnt.
-                                            // So now the popups will be handled by panel rather than individually from the widgets 
-                                            // and popup could appear under the panels, rather than the widgets. Bit junky but its what we have.
                                             anchors.fill: parent;
                                             property bool hasPopup: !(widgetName === "weather" || widgetName === "workspace");
                                             hoverEnabled: hasPopup ? true : false;
                                             cursorShape: hasPopup ? Qt.PointingHandCursor : Qt.ArrowCursor;
                                             acceptedButtons: hasPopup ? Qt.LeftButton | Qt.RightButton : Qt.NoButton;
                                             onClicked: {
-                                                // Set the left popup to the correct element
                                                 GlobalStates.leftPopup = (GlobalStates.leftPopup === "") ? widgetName : "";
-                                                GlobalStates.leftPopupAnchor = dynamicItem.isFirst;
-                                                // Clear all the other popup
+                                                GlobalStates.leftPopupCallerIndex = index;
+                                                // Clear all the other popups
                                                 GlobalStates.middlePopup = "";
                                                 GlobalStates.rightPopup = "";
-                                                GlobalStates.rightPopupAnchor = false;
 
-                                                // console.log("Left panel popup:",GlobalStates.leftPopup);
-                                                // console.log("Left panel popup anchor:",GlobalStates.leftPopupAnchor);
-                                                // console.log("Middle panel popup:",GlobalStates.middlePopup);
-                                                // console.log("Right panel popup:",GlobalStates.rightPopup);
-                                                // console.log("Right panel popup anchor:",GlobalStates.rightPopupAnchor, "\n");
+                                                widgetLayout.popupDebugPrint();
                                             }
                                         }
+                                    }
+                                    Component.onCompleted:{
+                                        GlobalStates.leftElementWidth[index] = dynamicItem.width;
                                     }
                                 }
                             }
                         }
                         Row { // Middle panel
                             id: middlePanel;
-                            spacing: 0;
+                            spacing: Config.rowSpacing;
                             height: parent.height;
                             anchors.centerIn: parent;
                             Repeater {
@@ -143,11 +141,7 @@ ShellRoot{
                                                 GlobalStates.rightPopup = "";
                                                 GlobalStates.rightPopupAnchor = false;
 
-                                                // console.log("Left panel popup:",GlobalStates.leftPopup);
-                                                // console.log("Left panel popup anchor:",GlobalStates.leftPopupAnchor);
-                                                // console.log("Middle panel popup:",GlobalStates.middlePopup);
-                                                // console.log("Right panel popup:",GlobalStates.rightPopup);
-                                                // console.log("Right panel popup anchor:",GlobalStates.rightPopupAnchor, "\n");
+                                                widgetLayout.popupDebugPrint();
                                             }
                                         }
                                     }
@@ -156,7 +150,7 @@ ShellRoot{
                         }
                         Row { // Right panel
                             id: rightPanel;
-                            spacing: 0;
+                            spacing: Config.rowSpacing;
                             height: parent.height;
                             anchors.right: parent.right;
                             layoutDirection: Qt.RightToLeft;
@@ -168,6 +162,9 @@ ShellRoot{
                                     implicitWidth: loader.item ? loader.item.implicitWidth : 0;
                                     property string widgetName: modelData;
                                     property bool isFirst: (index === 0);
+                                    Component.onCompleted:{
+                                        GlobalStates.rightElementWidth[index] = dynamicItem.width;
+                                    }
                                     Loader {
                                         id: loader;
                                         anchors.centerIn: parent;
@@ -180,19 +177,13 @@ ShellRoot{
                                             cursorShape: hasPopup ? Qt.PointingHandCursor : Qt.ArrowCursor;
                                             acceptedButtons: hasPopup ? Qt.LeftButton | Qt.RightButton : Qt.NoButton;
                                             onClicked: {
-                                                // Set the right popup to the correct element
                                                 GlobalStates.rightPopup = (GlobalStates.rightPopup === "") ? widgetName : "";
-                                                GlobalStates.rightPopupAnchor = dynamicItem.isFirst;
-                                                // Clear all the other popup
+                                                GlobalStates.leftPopupCallerIndex = index;
+                                                // Clear all the other popups
                                                 GlobalStates.middlePopup = "";
                                                 GlobalStates.leftPopup = "";
-                                                GlobalStates.leftPopupAnchor = false;
 
-                                                // console.log("Left panel popup:",GlobalStates.leftPopup);
-                                                // console.log("Left panel popup anchor:",GlobalStates.leftPopupAnchor);
-                                                // console.log("Middle panel popup:",GlobalStates.middlePopup);
-                                                // console.log("Right panel popup:",GlobalStates.rightPopup);
-                                                // console.log("Right panel popup anchor:",GlobalStates.rightPopupAnchor, "\n");
+                                                widgetLayout.popupDebugPrint();
                                             }
                                         }
                                     }
@@ -203,13 +194,7 @@ ShellRoot{
                 }
                 LazyLoader{ // Clock widget loader
                     active: (GlobalStates.leftPopup === "clock" || GlobalStates.rightPopup === "clock" || GlobalStates.middlePopup === "clock");
-                    Calendar{
-                        anchors.top: true;
-                        anchors.left: GlobalStates.leftPopupAnchor;
-                        anchors.right: GlobalStates.rightPopupAnchor;
-                        margins.left: Config.margin;
-                        margins.right: Config.margin;
-                    }
+                    Calendar{}
                 }
             }
         }

@@ -4,13 +4,14 @@ import Quickshell
 import Quickshell.Io
 
 Singleton{
+    id: root;
     // ../config/widgets.json
     property var leftWidgetList: [];
     property var middleWidgetList: [];
     property var rightWidgetList: [];
     
     Component.onCompleted: {
-        refresh();
+        root.refresh();
     }
     onRefresh: {
         leftWidgetList = adapter.leftWidgetList;
@@ -37,7 +38,7 @@ Singleton{
         
         onFileChanged: {
             reload();
-            refresh();
+            root.refresh();
             console.log("Widget config file changed, reloading adapter");
         }
         onAdapterUpdated: {
@@ -45,13 +46,15 @@ Singleton{
             console.log("Widget config adapter updated, writing adapter to file");
         }
 
-         // If file is empty it writes the defaults  
-        onLoaded: {
-            if (data().length === 0 || text().trim() === "" || text().trim() === "{}") {  
-                console.log("Widget config file is empty, writing defaults");  
-                writeAdapter();  
+        // If file is empty write default to it otherwise read refresh()
+        onLoaded: {  
+            if (data().length === 0 || text().trim() === "" || text().trim() === "{}") { 
+                console.log("Widget config file is empty, writing defaults"); 
+                writeAdapter(); 
+            } else {
+                root.refresh();
             }  
-        }  
+        }
         
         // If file doesnt exists it tries to create a new one with the default parameters in it
         // Not too reliable
@@ -64,9 +67,9 @@ Singleton{
         
         JsonAdapter {
             id: adapter;
-            property var leftWidgetList: ["clock", "clock"];
-            property var middleWidgetList: ["workspace", "clock"];
-            property var rightWidgetList: ["clock"];
+            property var leftWidgetList: [];
+            property var middleWidgetList: [];
+            property var rightWidgetList: [];
         }
         
     }

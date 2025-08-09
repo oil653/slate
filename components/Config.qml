@@ -9,6 +9,7 @@ Singleton{
     property real opacity: adapter.opacity; // Opacity of the bar
     property real radius: adapter.radius; // Radius of the main bar
     property bool bottomRadius: adapter.bottomRadius; // If set to true the bottom sides will have radius applyed
+    property real rowSpacing: adapter.rowSpacing;
     
     // Workspaces
     property bool minimalWorkspace: adapter.minimalWorkspace; // Defines the mode of the workspace 
@@ -68,6 +69,7 @@ Singleton{
             property bool minimalWorkspace: false;
             property bool isWorkspacesPerMonitor: true;
             property string dateFormat: "hh:mm <b>·</b> dddd, MMM d"; // Full list of format specifiers on wiki
+            property real rowSpacing: 10;
         }
         
     }

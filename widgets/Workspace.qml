@@ -12,6 +12,7 @@ Rectangle{
     id: root;
     color: "Transparent";
     required property string currentMonitor; // The caller passes the current monitor for sorting
+    implicitWidth: bg.implicitWidth;
 
 
     states: [
@@ -19,7 +20,7 @@ Rectangle{
             name: "NORMAL";
             PropertyChanges{ // Here both the bg and the workspace instance's properties will be modified because of qml limitations
                 target: bg;
-                color: Colors.surface0;
+                iColor: Colors.surface0;
                 secondaryColor: Colors.overlay0;
                 activeColor: Colors.overlay1;
                 textColor: Colors.text;
@@ -33,7 +34,7 @@ Rectangle{
             name: "MIN";
             PropertyChanges{
                 target: bg;
-                color: "transparent";
+                iColor: "transparent";
                 secondaryColor: "transparent";
                 activeColor: "transparent";
                 textColor: Colors.text;
@@ -46,16 +47,16 @@ Rectangle{
     ]
     state: (Config.minimalWorkspace) ? "MIN" : "NORMAL";
 
-    Item{ // idk why i named this bg, but there must be some logic behind it
+    WrapperRectangle{ // idk why i named this bg, but there must be some logic behind it
         id: bg;
         anchors.centerIn: parent;
         width: row.implicitWidth;
+        color: "transparent";
 
         // properties the workspace instance will access
         // the state above cant change the instances but the instance can acess these properties
-        // the i in the beginning means instance
         property string secondaryColor;
-        property string color;
+        property string iColor; // instaceColor
         property real radius: 13;
         property string textColor;
         property string outlinedTextColor;
@@ -97,7 +98,7 @@ Rectangle{
                     topRightRadius: (isLast) ? bg.radius : 0;
                     bottomRightRadius: (isLast) ? bg.radius : 0;
 
-                    color: (model.focused) ? bg.secondaryColor : (model.active) ? bg.activeColor : (model.urgent) ? bg.urgentColor : bg.color ;
+                    color: (model.focused) ? bg.secondaryColor : (model.active) ? bg.activeColor : (model.urgent) ? bg.urgentColor : bg.iColor ;
                     border.width: 0;
 
                     Behavior on color { 
