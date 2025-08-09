@@ -64,8 +64,8 @@ Singleton{
         
         JsonAdapter {
             id: adapter;
-            property var leftWidgetList: [];
-            property var middleWidgetList: ["workspace"];
+            property var leftWidgetList: ["clock", "clock"];
+            property var middleWidgetList: ["workspace", "clock"];
             property var rightWidgetList: ["clock"];
         }
         

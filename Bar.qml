@@ -75,11 +75,37 @@ ShellRoot{
                                     implicitHeight: widgetLayout.height;
                                     implicitWidth: loader.item ? loader.item.implicitWidth : 0;
                                     property string widgetName: modelData;
+                                    property bool isFirst: (index === 0); // True if the first element in the row
                                     Loader {
                                         id: loader;
                                         anchors.centerIn: parent;
                                         active: widgetName !== "";
                                         sourceComponent: widgetLayout.getCurrentWidget(widgetName);
+                                        MouseArea {
+                                            // I tried a lots of thing to get the relative position of the delegate to the bar but i couldnt.
+                                            // So now the popups will be handled by panel rather than individually from the widgets 
+                                            // and popup could appear under the panels, rather than the widgets. Bit junky but its what we have.
+                                            anchors.fill: parent;
+                                            property bool hasPopup: !(widgetName === "weather" || widgetName === "workspace");
+                                            hoverEnabled: hasPopup ? true : false;
+                                            cursorShape: hasPopup ? Qt.PointingHandCursor : Qt.ArrowCursor;
+                                            acceptedButtons: hasPopup ? Qt.LeftButton | Qt.RightButton : Qt.NoButton;
+                                            onClicked: {
+                                                // Set the left popup to the correct element
+                                                GlobalStates.leftPopup = (GlobalStates.leftPopup === "") ? widgetName : "";
+                                                GlobalStates.leftPopupAnchor = dynamicItem.isFirst;
+                                                // Clear all the other popup
+                                                GlobalStates.middlePopup = "";
+                                                GlobalStates.rightPopup = "";
+                                                GlobalStates.rightPopupAnchor = false;
+
+                                                // console.log("Left panel popup:",GlobalStates.leftPopup);
+                                                // console.log("Left panel popup anchor:",GlobalStates.leftPopupAnchor);
+                                                // console.log("Middle panel popup:",GlobalStates.middlePopup);
+                                                // console.log("Right panel popup:",GlobalStates.rightPopup);
+                                                // console.log("Right panel popup anchor:",GlobalStates.rightPopupAnchor, "\n");
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -101,6 +127,29 @@ ShellRoot{
                                         anchors.centerIn: parent;
                                         active: widgetName !== "";
                                         sourceComponent: widgetLayout.getCurrentWidget(widgetName);
+                                        MouseArea {
+                                            anchors.fill: parent;
+                                            // Not all widgets have popup
+                                            property bool hasPopup: !(widgetName === "weather" || widgetName === "workspace");
+                                            hoverEnabled: hasPopup ? true : false;
+                                            cursorShape: hasPopup ? Qt.PointingHandCursor : Qt.ArrowCursor;
+                                            acceptedButtons: hasPopup ? Qt.LeftButton | Qt.RightButton : Qt.NoButton;
+                                            onClicked: {
+                                                // Set the middle popup to the correct element
+                                                GlobalStates.middlePopup = (GlobalStates.middlePopup === "") ? widgetName : "";
+                                                // Clear all the other popup
+                                                GlobalStates.leftPopup = "";
+                                                GlobalStates.leftPopupAnchor = false;
+                                                GlobalStates.rightPopup = "";
+                                                GlobalStates.rightPopupAnchor = false;
+
+                                                // console.log("Left panel popup:",GlobalStates.leftPopup);
+                                                // console.log("Left panel popup anchor:",GlobalStates.leftPopupAnchor);
+                                                // console.log("Middle panel popup:",GlobalStates.middlePopup);
+                                                // console.log("Right panel popup:",GlobalStates.rightPopup);
+                                                // console.log("Right panel popup anchor:",GlobalStates.rightPopupAnchor, "\n");
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -118,21 +167,48 @@ ShellRoot{
                                     implicitHeight: widgetLayout.height;
                                     implicitWidth: loader.item ? loader.item.implicitWidth : 0;
                                     property string widgetName: modelData;
+                                    property bool isFirst: (index === 0);
                                     Loader {
                                         id: loader;
                                         anchors.centerIn: parent;
                                         active: widgetName !== "";
                                         sourceComponent: widgetLayout.getCurrentWidget(widgetName);
+                                        MouseArea {
+                                            anchors.fill: parent;
+                                            property bool hasPopup: !(widgetName === "weather" || widgetName === "workspace");
+                                            hoverEnabled: hasPopup ? true : false;
+                                            cursorShape: hasPopup ? Qt.PointingHandCursor : Qt.ArrowCursor;
+                                            acceptedButtons: hasPopup ? Qt.LeftButton | Qt.RightButton : Qt.NoButton;
+                                            onClicked: {
+                                                // Set the right popup to the correct element
+                                                GlobalStates.rightPopup = (GlobalStates.rightPopup === "") ? widgetName : "";
+                                                GlobalStates.rightPopupAnchor = dynamicItem.isFirst;
+                                                // Clear all the other popup
+                                                GlobalStates.middlePopup = "";
+                                                GlobalStates.leftPopup = "";
+                                                GlobalStates.leftPopupAnchor = false;
+
+                                                // console.log("Left panel popup:",GlobalStates.leftPopup);
+                                                // console.log("Left panel popup anchor:",GlobalStates.leftPopupAnchor);
+                                                // console.log("Middle panel popup:",GlobalStates.middlePopup);
+                                                // console.log("Right panel popup:",GlobalStates.rightPopup);
+                                                // console.log("Right panel popup anchor:",GlobalStates.rightPopupAnchor, "\n");
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-                LazyLoader{
-                    active: GlobalStates.calendarOpen;
+                LazyLoader{ // Clock widget loader
+                    active: (GlobalStates.leftPopup === "clock" || GlobalStates.rightPopup === "clock" || GlobalStates.middlePopup === "clock");
                     Calendar{
-
+                        anchors.top: true;
+                        anchors.left: GlobalStates.leftPopupAnchor;
+                        anchors.right: GlobalStates.rightPopupAnchor;
+                        margins.left: Config.margin;
+                        margins.right: Config.margin;
                     }
                 }
             }

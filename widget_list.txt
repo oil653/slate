@@ -1,8 +1,8 @@
-home
-media
 workspaces [✓]
-power(batterty, power profile)
-notification
-clock [✓] popup: calendar, todo, reminders
+home; popup: wifi, bluetooth, volume, system info, dnd, power button, media control, all system tray, weather
+media; popup: media control
+batterty; popup: power mode, battery temp, cycles maybe others 
+notification; popup: dnd, notif list
+clock [✓]; popup: calendar, todo, reminders
+metrics; popup: cpu, gpu, ram, storage stats
 weather
-metrics
