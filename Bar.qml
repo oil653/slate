@@ -178,7 +178,7 @@ ShellRoot{
                                             acceptedButtons: hasPopup ? Qt.LeftButton | Qt.RightButton : Qt.NoButton;
                                             onClicked: {
                                                 GlobalStates.rightPopup = (GlobalStates.rightPopup === "") ? widgetName : "";
-                                                GlobalStates.leftPopupCallerIndex = index;
+                                                GlobalStates.rightPopupCallerIndex = index;
                                                 // Clear all the other popups
                                                 GlobalStates.middlePopup = "";
                                                 GlobalStates.leftPopup = "";

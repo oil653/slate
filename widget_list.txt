@@ -1,8 +1,15 @@
 workspaces [✓]
+
 home; popup: wifi, bluetooth, volume, system info, dnd, power button, media control, all system tray, weather
+
 media; popup: media control
+
 batterty; popup: power mode, battery temp, cycles maybe others 
+
 notification; popup: dnd, notif list
-clock [✓]; popup: calendar, todo, reminders
+
+clock [✓]; popup: calendar [✓], todo [later], reminders [later]
+
 metrics; popup: cpu, gpu, ram, storage stats
+
 weather
