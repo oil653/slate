@@ -1,10 +1,10 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell.Widgets
 import Quickshell
 import qs
 import qs.components
 import qs.widgets
+import qs.services
 import qs.modules
 
 
@@ -27,7 +27,6 @@ ShellRoot{
                 Component{
                     id: workspaceLoader;
                     Workspace{
-                        // implicitWidth: 100;
                         implicitHeight: Config.height -2;
                         currentMonitor: (Config.isWorkspacesPerMonitor) ? panelRoot.modelData.name : "";
                     }
@@ -35,7 +34,12 @@ ShellRoot{
                 Component{
                     id: clockLoader;
                     Clock{
-                        // implicitWidth: 200;
+                        implicitHeight: Config.height -2;
+                    }
+                }
+                Component{
+                    id: mediaLoader;
+                    Media{
                         implicitHeight: Config.height -2;
                         anchors.centerIn: parent;
                     }
@@ -60,6 +64,7 @@ ShellRoot{
                             switch (x) {
                                 case "workspace": return workspaceLoader;
                                 case "clock": return clockLoader;
+                                case "media": return mediaLoader;
                                 default: return null;
                             }
                         }
@@ -195,6 +200,10 @@ ShellRoot{
                 LazyLoader{ // Clock widget loader
                     active: (GlobalStates.leftPopup === "clock" || GlobalStates.rightPopup === "clock" || GlobalStates.middlePopup === "clock");
                     Calendar{}
+                }
+                LazyLoader{ // Media widget loader
+                    active: (GlobalStates.leftPopup === "media" || GlobalStates.rightPopup === "media" || GlobalStates.middlePopup === "media");
+                    MediaControl{}
                 }
             }
         }

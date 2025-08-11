@@ -46,6 +46,26 @@ PanelWindow{
     margins.left: (isleftClamped) ? Config.margin/2 : calculatedleftMargin;
     margins.right: (isRightClamped) ? Config.margin/2 : calculatedRightMargin;
 
+    // Set initial opacity to 0 for fade-in effect
+    contentItem.opacity: 0;
+      
+    // Animate opacity when window visibility changes
+    Behavior on contentItem.opacity {
+        NumberAnimation {
+            duration: 150;
+            easing.type: Easing.OutQuad;
+        }
+    }
+
+    // Trigger fade-in when window becomes visible  
+    onVisibleChanged: {
+        if (visible) { 
+            contentItem.opacity = 1;
+        } else {
+            contentItem.opacity = 0;
+        }  
+    }
+
     
     implicitHeight: 250;
     implicitWidth: 250;
@@ -54,8 +74,11 @@ PanelWindow{
     Rectangle { // The calendar is mostly vibe coded, i review and fix some stuff with it, but it should be fine
         id: calRoot;
         anchors.fill: parent;
-        radius: 10;
         color: Colors.surface0;
+
+        radius: 15;
+        topLeftRadius: Config.popupTopRadius ? 15 : 0;
+        topRightRadius: Config.popupTopRadius ? 15 : 0;
 
         property date today: new Date();
         property int displayedMonth: today.getMonth();

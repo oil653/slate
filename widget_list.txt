@@ -2,7 +2,7 @@ workspaces [✓]
 
 home; popup: wifi, bluetooth, volume, system info, dnd, power button, media control, all system tray, weather
 
-media; popup: media control
+media [✓]; popup: media controls (volume control later)
 
 batterty; popup: power mode, battery temp, cycles maybe others 
 

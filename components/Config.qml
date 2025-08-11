@@ -9,14 +9,20 @@ Singleton{
     property real opacity: adapter.opacity; // Opacity of the bar
     property real radius: adapter.radius; // Radius of the main bar
     property bool bottomRadius: adapter.bottomRadius; // If set to true the bottom sides will have radius applyed
-    property real rowSpacing: adapter.rowSpacing;
+    property real rowSpacing: adapter.rowSpacing; // Spacing between the widgets
     
+    // Global 
+    property bool popupTopRadius: adapter.popupTopRadius; // if set to true the popups will also have radius on the top. Reccomended to be the same as bottomRadius;
+
     // Workspaces
     property bool minimalWorkspace: adapter.minimalWorkspace; // Defines the mode of the workspace 
     property bool isWorkspacesPerMonitor: adapter.isWorkspacesPerMonitor // If false all open worksapces will show on all monitors
 
     // Clock
     property string dateFormat: adapter.dateFormat;
+
+    // Media
+    property real mediaPlayerWidth: adapter.mediaPlayerWidth;
 
 
     function adapterReload(){
@@ -65,11 +71,13 @@ Singleton{
             property real margin: 30;
             property real opacity: 1;
             property real radius: 15;
-            property bool bottomRadius: true; // for dev;
+            property bool bottomRadius: true;
             property bool minimalWorkspace: false;
             property bool isWorkspacesPerMonitor: true;
             property string dateFormat: "hh:mm <b>·</b> dddd, MMM d"; // Full list of format specifiers on wiki
             property real rowSpacing: 10;
+            property real mediaPlayerWidth: 200;
+            property bool popupTopRadius: false;
         }
         
     }

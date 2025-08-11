@@ -4,8 +4,10 @@
     "height": 30,
     "isWorkspacesPerMonitor": true,
     "margin": 30,
+    "mediaPlayerWidth": 200,
     "minimalWorkspace": false,
     "opacity": 1,
+    "popupTopRadius": false,
     "radius": 15,
     "rowSpacing": 10
 }
