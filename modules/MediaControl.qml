@@ -1,4 +1,7 @@
+//@ pragma UseQApplication
+
 import QtQuick
+import QtQuick.Controls
 import Quickshell.Widgets
 import Quickshell.Services.Mpris
 import Quickshell
@@ -134,19 +137,30 @@ PanelWindow{
             anchors.right: parent.right; anchors.rightMargin: parent.seperator;
             anchors.top: trackArtist.bottom; anchors.topMargin: parent.seperator;
             height: 30; width: 100; radius: 20;
-            color: Colors.overlay0;
+            color: Colors.overlay1;
             Text{
                 anchors.fill: parent; anchors.margins: 5;
                 anchors.centerIn: parent;
                 horizontalAlignment: Text.AlignHCenter;
                 text: MediaController.activePlayer.identity;
-                color: Colors.text1;
+                color: Colors.text;
                 font.weight: 600;
                 font.pointSize: 12;
                 MouseArea{
                     anchors.fill: parent;
-                    onClicked: {
-                        // Dropdown menu integration should be here...
+                        acceptedButtons: Qt.LeftButton | Qt.RightButton;
+                    onClicked: playerDropdown.open();
+                } 
+            }
+            Menu{ // This menu looks absolutely ASS, should be reworked with a popup or something
+                id: playerDropdown;
+                width: parent.width;
+                Repeater{
+                    model: Mpris.players;
+                    delegate: MenuItem{
+                        property var data: modelData;
+                        text: data.identity;
+                        onTriggered: MediaController.setActivePlayer(data);
                     }
                 }
             }
@@ -231,6 +245,7 @@ PanelWindow{
                 }
                 Rectangle{
                     id: slider;
+                    visible: MediaController.activePlayer.positionSupported;
                     width: parent.width - 2 * timeStamp.width - 15; // 170
                     height: 10; radius: 20
                     anchors.verticalCenter: parent.verticalCenter;
@@ -245,10 +260,12 @@ PanelWindow{
                     MouseArea {  
                         anchors.fill: parent;
                         onClicked: {
-                            if (MediaController.activePlayer && MediaController.activePlayer.positionSupported) {
-                                var relativePosition = mouseX / parent.width;
-                                var newPositionSeconds = relativePosition * MediaController.activePlayer.length;
-                                MediaController.activePlayer.position = newPositionSeconds;
+                            if (MediaController.activePlayer.canSeek){
+                                if (MediaController.activePlayer && MediaController.activePlayer.positionSupported) {
+                                    var relativePosition = mouseX / parent.width;
+                                    var newPositionSeconds = relativePosition * MediaController.activePlayer.length;
+                                    MediaController.activePlayer.position = newPositionSeconds;
+                                }
                             }
                         }
                     }

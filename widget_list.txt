@@ -2,13 +2,13 @@ workspaces [✓]
 
 home; popup: wifi, bluetooth, volume, system info, dnd, power button, media control, all system tray, weather
 
-media [✓]; popup: media controls (volume control later)
+media [✓]; popup: media controls [✓]      todo: volume, jump to player, make dropdown menu pretier
 
-batterty; popup: power mode, battery temp, cycles maybe others 
+batterty; popup: power mode, battery temp, cycles maybe others
 
 notification; popup: dnd, notif list
 
-clock [✓]; popup: calendar [✓], todo [later], reminders [later]
+clock [✓]; popup: calendar [✓]        todo: reminders [later]
 
 metrics; popup: cpu, gpu, ram, storage stats
 
