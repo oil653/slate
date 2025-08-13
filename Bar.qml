@@ -10,6 +10,20 @@ import qs.modules
 
 ShellRoot{
     id: root;
+    // Popup loader
+    LazyLoader{
+        active: GlobalStates.globalStatesContain("clock");
+        Calendar{}
+    }
+    LazyLoader{
+        active: GlobalStates.globalStatesContain("media");
+        MediaControl{}
+    }
+    LazyLoader{
+        active: GlobalStates.globalStatesContain("notif") || GlobalStates.globalStatesContain("notification");
+        Notifications{}
+    }
+
     Variants{
         model: Quickshell.screens;
         delegate: Component{
@@ -44,6 +58,15 @@ ShellRoot{
                         anchors.centerIn: parent;
                     }
                 }
+                Component{
+                    id: notifLoader;
+                    Bell{
+                        implicitHeight: Config.height -2;
+                        anchors.centerIn: parent;
+                    }
+                }
+
+                
                 Rectangle{
                     anchors.fill: parent;
 
@@ -65,6 +88,7 @@ ShellRoot{
                                 case "workspace": return workspaceLoader;
                                 case "clock": return clockLoader;
                                 case "media": return mediaLoader;
+                                case "notif" || "notification" : return notifLoader;
                                 default: return null;
                             }
                         }
@@ -196,14 +220,6 @@ ShellRoot{
                             }
                         }
                     }
-                }
-                LazyLoader{ // Clock widget loader
-                    active: (GlobalStates.leftPopup === "clock" || GlobalStates.rightPopup === "clock" || GlobalStates.middlePopup === "clock");
-                    Calendar{}
-                }
-                LazyLoader{ // Media widget loader
-                    active: (GlobalStates.leftPopup === "media" || GlobalStates.rightPopup === "media" || GlobalStates.middlePopup === "media");
-                    MediaControl{}
                 }
             }
         }

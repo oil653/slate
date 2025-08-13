@@ -13,4 +13,8 @@ Singleton{
 
 
     property string middlePopup: "";
+
+    function globalStatesContain(panelName: string): bool {
+        return (GlobalStates.leftPopup === panelName || GlobalStates.rightPopup === panelName || GlobalStates.middlePopup === panelName);
+    }
 }

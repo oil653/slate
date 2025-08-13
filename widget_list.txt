@@ -6,7 +6,7 @@ media [✓]; popup: media controls [✓]      todo: volume, jump to player, make
 
 batterty; popup: power mode, battery temp, cycles maybe others
 
-notification; popup: dnd, notif list
+notification [✓]; popup: delete all, silent, notif list with groups; on new notif: popup on the side of the screen
 
 clock [✓]; popup: calendar [✓]        todo: reminders [later]
 

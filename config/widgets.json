@@ -1,9 +1,10 @@
 {
     "leftWidgetList": [
-        "media"
+        "notif"
     ],
     "middleWidgetList": [
-        "workspace"
+        "workspace",
+        "media"
     ],
     "rightWidgetList": [
         "clock"
