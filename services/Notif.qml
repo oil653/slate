@@ -17,6 +17,9 @@ Singleton{
     // The whole list of notifs are here, generally should not be used
     property list<Notif> list: [];
 
+    // List of currently active popups
+    property list<Notif> popups: [];
+
     // Signal emmited when a new notif appears, contains the notification data the notification data
     signal newNotification(notification: var);
 
@@ -69,6 +72,20 @@ Singleton{
         root.list.splice(0, root.list.length);
         root.groups.splice(0, root.list.length);
     }
+    function removePopup(notif: var){
+        const index = root.popups.indexOf(notif);
+        if (index !== -1){
+            root.popups.splice(index, 1);
+        }
+    }
+    function dismissPopup(notif: var){
+        const popupIndex = root.popups.indexOf(notif);
+        if (popupIndex !== -1){
+            root.popups.splice(popupIndex, 1);
+        }
+        removeNotification(notif);
+    }
+    
 
     function addToGroup(notif) {  
         const appName = notif.appName;
@@ -97,7 +114,32 @@ Singleton{
         // Add notification to group  
         group.list.push(notif);
     }  
-
+    function popupHandler(notif: var) {
+        root.popups.push(notif);
+        // console.log(root.popups)
+        popupTimerComp.createObject(root, {
+            targetNotif: notif
+        });
+        // console.log(root.popups)
+    }
+    
+    Component {  
+        id: popupTimerComp  
+        Timer {  
+            interval: Config.notifPopupTime;
+            repeat: false;
+            running: true;
+            property var targetNotif;
+            
+            onTriggered: {
+                const index = root.popups.indexOf(targetNotif);
+                if (index !== -1) {
+                    root.popups.splice(index, 1);
+                }
+                destroy();
+            }  
+        }  
+    }  
     NotificationServer{
         id: server
         imageSupported: true;
@@ -111,24 +153,17 @@ Singleton{
         onNotification: (notification) => {
             notification.tracked = true;
             const notif = notifComp.createObject(root, {
-                popup: true,
                 notification: notification
             });
-            root.list.push(notif);
-            addToGroup(notif);
-            root.newNotification(notif);
+            root.list.push(notif); // ist
+            addToGroup(notif); // group
+            root.newNotification(notif); // signal
+            if (!root.isSilent){root.popupHandler(notif)}; // Popup
         }
     }
 
     component Notif: QtObject {
         id: notif
-
-        required property bool popup;
-        // Timer{
-        //     interval: 2000; // CONFIG!
-        //     running: false;
-        //     onTriggered: popup = false;
-        // }
 
         readonly property date time: new Date();
         readonly property string timeStr: {

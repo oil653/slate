@@ -23,7 +23,6 @@ ShellRoot{
         active: GlobalStates.globalStatesContain("notif") || GlobalStates.globalStatesContain("notification");
         Notifications{}
     }
-
     Variants{
         model: Quickshell.screens;
         delegate: Component{

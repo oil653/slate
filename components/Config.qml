@@ -24,6 +24,9 @@ Singleton{
     // Media
     property real mediaPlayerWidth: adapter.mediaPlayerWidth;
 
+    // Notification
+    property int notifPopupTime: 5000; // How much time the popups should be shown
+
 
     function adapterReload(){
         fileView.reload()

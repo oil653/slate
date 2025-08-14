@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP_NAME="MESSANGER"
+APP_NAME="MESSENGER"
 
 # Check if notify-send is available
 if command -v notify-send &> /dev/null; then
