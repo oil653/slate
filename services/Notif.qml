@@ -62,6 +62,7 @@ Singleton{
                 break;  
             }  
         }  
+        removePopup(notif);
     }
     // remove every notification
     function removeAllNotification() {
@@ -70,7 +71,8 @@ Singleton{
         }
 
         root.list.splice(0, root.list.length);
-        root.groups.splice(0, root.list.length);
+        root.groups.splice(0, root.groups.length);
+        root.popups.splice(0, root.popups.length);
     }
     function removePopup(notif: var){
         const index = root.popups.indexOf(notif);
@@ -186,7 +188,12 @@ Singleton{
         readonly property string image: notification.image;
         readonly property int urgency: notification.urgency;
         readonly property list<NotificationAction> actions: notification.actions;
+        readonly property bool isCritical: (urgency === NotificationUrgency.Critical);
 
+        function dismiss(){
+            // notification.dismisss();
+            destroy();
+        }
     }
 
     component Group: QtObject{
@@ -194,6 +201,18 @@ Singleton{
 
         required property string appName;
         property list<Notif> list: [];
+
+        function removeNotif(notif){
+            root.removeNotification(notif);
+        }
+        function hasCritical(){
+            for (let i = 0; i < list.length; i++){
+                if (list[i].isCritical){
+                    return true;
+                }
+            }
+            return false;
+        }
     }
     
     Component {

@@ -49,7 +49,7 @@ Variants{
                 id: hidePopup;
                 anchors.top: parent.top; anchors.topMargin: 5;
                 anchors.right: parent.right; anchors.rightMargin: 5;
-                implicitSize: 25;
+                implicitSize: 20;
                 source: "root:assets/icons/x.svg"
                 MouseArea{
                     anchors.fill: parent;
@@ -59,7 +59,7 @@ Variants{
             IconImage{
                 id: dismissNotif;
                 anchors.right: hidePopup.left; anchors.verticalCenter: hidePopup.verticalCenter;
-                implicitSize: 25;
+                implicitSize: 20;
                 source: "root:assets/icons/delete.svg"
                 MouseArea{
                     anchors.fill: parent;
