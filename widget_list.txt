@@ -1,15 +1,17 @@
-workspaces [✓]
-
-home; popup: wifi, bluetooth, volume, system info, dnd, power button, media control, all system tray, weather
+[✓] workspaces
 
 [✓] media [✓]; popup: media controls [✓]      todo: volume, jump to player, make dropdown menu prettier
 
+[✓] notification; todo: animations, appIcon
+
+[✓] clock; todo: reminders connect with google/proton calendar?
+
+home; popup: wifi, bluetooth, volume, system info, dnd, power button, media control, all system tray, weather
+
 batterty; popup: power mode, battery temp, cycles maybe others
-
-notification [✓]; popup: delete all [✓], silent, notif list with groups [✓]; on new notif: popup on the side of the screen [✓]     todo: animations, appIcon
-
-[✓] clock [✓]; popup: calendar [✓]        todo: reminders
 
 metrics; popup: cpu, gpu, ram, storage stats
 
 weather
+
+system tray

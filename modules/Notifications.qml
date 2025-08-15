@@ -74,8 +74,16 @@ PopupPos{
                             property int notifCount: notifRepeater.count;
                             property real notifHeight: notifCount * (70 + 2); // 50 is the height 2 is the spacing
 
-                            implicitHeight: 20 + (dropdown ? notifHeight : 0);
+                            height: 20 + (dropdown ? notifHeight : 0);
                             implicitWidth: bottomPanel.width -10; // 5-5 margin on the sides
+
+                            Behavior on height{
+                                NumberAnimation{
+                                    id: anim;
+                                    duration: 200;
+                                    easing.type: Easing.OutQuad;
+                                }
+                            }
                             
                             Rectangle{
                                 implicitHeight: 20;
@@ -127,6 +135,24 @@ PopupPos{
 
                                             bottomLeftRadius: isLast ? 15 : 0;
                                             bottomRightRadius: isLast ? 15 : 0;
+                                            
+                                            property bool removing: false;
+
+                                            ParallelAnimation {
+                                                running: removing;
+                                                NumberAnimation { target: notifItem; property: "x"; to: -width; duration: 250 }
+                                                NumberAnimation { target: notifItem; property: "opacity"; to: 0; duration: 200 }
+                                                onFinished: app.modelData.removeNotif(modelData);
+                                            }
+
+                                            SequentialAnimation on opacity{
+                                                NumberAnimation{
+                                                    from: 0;
+                                                    to: 1;
+                                                    easing.type: Easing.InQuad;
+                                                    duration: 200 + index * 200;
+                                                }
+                                            }
                                             IconImage{
                                                 anchors.top: parent.top; anchors.topMargin: 2;
                                                 anchors.right: parent.right; anchors.rightMargin: 10;
@@ -134,7 +160,7 @@ PopupPos{
                                                 source: "root:assets/icons/delete";
                                                 MouseArea{
                                                     anchors.fill: parent;
-                                                    onClicked: app.modelData.removeNotif(modelData);
+                                                    onClicked: notifItem.removing= true;
                                                 }
                                             }
                                             Column{
@@ -150,13 +176,13 @@ PopupPos{
                                                         radius: height;
                                                         visible: modelData.isCritical;
                                                     }
-                                                    SlidingText{
+                                                    SlidingText{ // SUMMARY
                                                         width: 130; height: 15; 
                                                         text: modelData.summary;
                                                         textColor: Colors.text;
-                                                        fontSize: 10;
+                                                        fontSize: 8;
                                                     }
-                                                    Text{
+                                                    Text{ // TIME
                                                         text: modelData.timeStr;
                                                         color: Colors.text2;
                                                     }

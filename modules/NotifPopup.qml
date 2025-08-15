@@ -30,79 +30,98 @@ Variants{
         property real radius: 10;
         property var notif: modelData;
         Rectangle{
-            id: bg;
+            color: "transparent"
             anchors.fill: parent;
-            opacity: 0.9;
-            
-            // color: Colors.overlay1;
-            color: "black";
-            radius: root.radius;
-            border{
-                color: "white";
-                width: 2;
-            }
-        }
-        Item{
-            id: fg;
-            anchors.fill: parent;
-            IconImage{
-                id: hidePopup;
-                anchors.top: parent.top; anchors.topMargin: 5;
-                anchors.right: parent.right; anchors.rightMargin: 5;
-                implicitSize: 20;
-                source: "root:assets/icons/x.svg"
-                MouseArea{
-                    anchors.fill: parent;
-                    onClicked: Notif.removePopup(root.notif);
+            opacity: 0;
+            Component.onCompleted: opacity = 1;
+
+            Behavior on opacity{
+                NumberAnimation{
+                    id: anim;
+                    duration: 200;
+                    easing.type: Easing.OutQuad;
                 }
             }
-            IconImage{
-                id: dismissNotif;
-                anchors.right: hidePopup.left; anchors.verticalCenter: hidePopup.verticalCenter;
-                implicitSize: 20;
-                source: "root:assets/icons/delete.svg"
-                MouseArea{
-                    anchors.fill: parent;
-                    onClicked: Notif.dismissPopup(root.notif);
-                }
+            Timer{
+                running: true; repeat: false;
+                interval: Config.notifPopupTime - anim.duration;
+                onTriggered: parent.opacity = 0;
             }
-            Column{
+            Rectangle{
+                id: bg;
                 anchors.fill: parent;
-                spacing: 5;
-                anchors{
-                    topMargin: 5;
-                    leftMargin: 5;
-                    rightMargin: 5;
-                }
-                Text{ // appName
-                    id: appName
-                    height: 8;
-                    width: parent.width;
-                    text: root.notif.appName;
-                    color: Colors.text;
-                    font.bold: true;
-                    font.pointSize: 8;
-                }
-                Text{ // Summary
-                    id: summary
-                    height: 15;
-                    width: parent.width;
-                    text: root.notif.summary;
-                    color: Colors.text;
-                    font.bold: true;
-                    font.pointSize: 14;
-                }
-                Text{ // Body
-                    id: body;
-                    height: parent.height - 8-15;
-                    width: parent.width;
-                    text: root.notif.body;
-                    color: Colors.text;
-                    font.bold: true;
-                    font.pointSize: 10;
-                    wrapMode: Text.WordWrap;
+                opacity: 0.9;
+                
+                // color: Colors.overlay1;
+                color: "black";
+                radius: root.radius;
+                border{
+                    color: "white";
+                    width: 2;
                 }
             }
-        }
+            Item{
+                id: fg;
+                anchors.fill: parent;
+                IconImage{
+                    id: hidePopup;
+                    anchors.top: parent.top; anchors.topMargin: 5;
+                    anchors.right: parent.right; anchors.rightMargin: 5;
+                    implicitSize: 20;
+                    source: "root:assets/icons/x.svg"
+                    MouseArea{
+                        anchors.fill: parent;
+                        onClicked: Notif.hidePopup(root.notif);
+                    }
+                }
+                IconImage{
+                    id: dismissNotif;
+                    anchors.right: hidePopup.left; anchors.verticalCenter: hidePopup.verticalCenter;
+                    implicitSize: 20;
+                    source: "root:assets/icons/delete.svg"
+                    MouseArea{
+                        anchors.fill: parent;
+                        onClicked: Notif.removePopup(root.notif);
+                    }
+                }
+                Column{
+                    anchors.fill: parent;
+                    spacing: 5;
+                    anchors{
+                        topMargin: 5;
+                        leftMargin: 5;
+                        rightMargin: 5;
+                    }
+                    Text{ // appName
+                        id: appName
+                        height: 8;
+                        width: parent.width;
+                        text: root.notif.appName;
+                        color: Colors.text;
+                        font.bold: true;
+                        font.pointSize: 8;
+                    }
+                    Text{ // Summary
+                        id: summary
+                        height: 15;
+                        width: parent.width;
+                        text: root.notif.summary;
+                        color: Colors.text;
+                        font.bold: true;
+                        font.pointSize: 12;
+                    }
+                    Text{ // Body
+                        id: body;
+                        height: parent.height - 8-15;
+                        width: parent.width;
+                        text: root.notif.body;
+                        color: Colors.text;
+                        font.bold: true;
+                        font.pointSize: 10;
+                        wrapMode: Text.WordWrap;
+                    }
+                }
+            }
+        }   
     } 
 }
