@@ -32,7 +32,7 @@ Variants{
         Rectangle{
             id: bg;
             anchors.fill: parent;
-            opacity: 0.6;
+            opacity: 0.9;
             
             // color: Colors.overlay1;
             color: "black";

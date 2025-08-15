@@ -6,7 +6,7 @@ home; popup: wifi, bluetooth, volume, system info, dnd, power button, media cont
 
 batterty; popup: power mode, battery temp, cycles maybe others
 
-notification [✓]; popup: delete all, silent, notif list with groups [✓]; on new notif: popup on the side of the screen [✓]     todo: animations, appIcon
+notification [✓]; popup: delete all [✓], silent, notif list with groups [✓]; on new notif: popup on the side of the screen [✓]     todo: animations, appIcon
 
 [✓] clock [✓]; popup: calendar [✓]        todo: reminders
 

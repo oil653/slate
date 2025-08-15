@@ -47,12 +47,13 @@ PopupPos{
                 }
             }
         }
-        Item{
+        ClippingRectangle{
             id: bottomPanel;
             width: parent.width;
             height: parent.height - controlPanel.implicitHeight - 10; // -10 because of the margin and some magic
             anchors.top: controlPanel.bottom;
             anchors.topMargin: 5;
+            color: "transparent";
             ScrollView{
                 anchors.fill: parent;
                 anchors.leftMargin: 5;
@@ -120,8 +121,12 @@ PopupPos{
                                             id: notifItem; 
                                             required property var modelData;
                                             required property int index;
-                                            implicitWidth: parent.width; height: 70;
+                                            property bool isLast: (app.modelData.list.indexOf(modelData) === app.modelData.list.length - 1)  
+                                            implicitWidth: parent.width; height: 70
                                             color: Colors.overlay1;
+
+                                            bottomLeftRadius: isLast ? 15 : 0;
+                                            bottomRightRadius: isLast ? 15 : 0;
                                             IconImage{
                                                 anchors.top: parent.top; anchors.topMargin: 2;
                                                 anchors.right: parent.right; anchors.rightMargin: 10;
@@ -158,7 +163,7 @@ PopupPos{
                                                 }
                                                 ClippingRectangle{
                                                     id: bodyClip;
-                                                    width: parent.width; height: notifItem.height-10; // 30 on minimal or notifItem.height-10
+                                                    width: parent.width; height: notifItem.height-10;
                                                     color: "transparent";
                                                     Text{
                                                         width: bodyClip.width; height: bodyClip.height;

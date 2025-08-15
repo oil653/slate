@@ -191,7 +191,8 @@ Singleton{
         readonly property bool isCritical: (urgency === NotificationUrgency.Critical);
 
         function dismiss(){
-            // notification.dismisss();
+            notification.dismisss();
+            notification.expire();
             destroy();
         }
     }
