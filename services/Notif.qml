@@ -209,7 +209,7 @@ Singleton{
             return elapsed >= notification.expireTimeout;  
         }
         
-        Component.onCompleted: console.log("new notif created:", notification, body, summary)
+        // Component.onCompleted: console.log("new notif created:", notification, body, summary)
         
 
         // If the notif server destroys the notification we need to clear this notif object:

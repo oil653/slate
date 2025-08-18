@@ -17,7 +17,10 @@ ShellRoot{
     }
     LazyLoader{
         active: GlobalStates.globalStatesContain("media");
-        MediaControl{}
+        PopupPos{    
+            implicitWidth: 400; implicitHeight: 120;
+            MediaControl{}
+        }
     }
     LazyLoader{
         active: GlobalStates.globalStatesContain("notif") || GlobalStates.globalStatesContain("notification");
@@ -64,6 +67,13 @@ ShellRoot{
                         anchors.centerIn: parent;
                     }
                 }
+                Component{
+                    id: systrayLoader;
+                    Systray{
+                        implicitHeight: Config.height;
+                        anchors.centerIn: parent;
+                    }
+                }
 
                 
                 Rectangle{
@@ -88,6 +98,7 @@ ShellRoot{
                                 case "clock": return clockLoader;
                                 case "media": return mediaLoader;
                                 case "notif" || "notification" : return notifLoader;
+                                case "systray" || "systemtray" : return systrayLoader;
                                 default: return null;
                             }
                         }
@@ -96,6 +107,11 @@ ShellRoot{
                             // console.log("rightPopup:", GlobalStates.rightPopup, "\n rightElementWidth", GlobalStates.rightElementWidth, "\n rightPopupCallerIndex", GlobalStates.rightPopupCallerIndex, "\n");
                             // console.log("middlePopup:", GlobalStates.middlePopup, "\n");
                         }
+                        function hasPopup(widgetName: string): bool{
+                            let list = ["weather", "workspace", "systray", "systemtray"];
+                            return !list.some(element => element === widgetName);
+                        }
+
                         Row { // Left panel
                             id: leftPanel;
                             spacing: Config.rowSpacing;
@@ -115,7 +131,7 @@ ShellRoot{
                                         sourceComponent: widgetLayout.getCurrentWidget(widgetName);
                                         MouseArea {
                                             anchors.fill: parent;
-                                            property bool hasPopup: !(widgetName === "weather" || widgetName === "workspace");
+                                            property bool hasPopup: widgetLayout.hasPopup(widgetName);
                                             hoverEnabled: hasPopup ? true : false;
                                             cursorShape: hasPopup ? Qt.PointingHandCursor : Qt.ArrowCursor;
                                             acceptedButtons: hasPopup ? Qt.LeftButton | Qt.RightButton : Qt.NoButton;
@@ -156,7 +172,7 @@ ShellRoot{
                                         MouseArea {
                                             anchors.fill: parent;
                                             // Not all widgets have popup
-                                            property bool hasPopup: !(widgetName === "weather" || widgetName === "workspace");
+                                            property bool hasPopup: widgetLayout.hasPopup(widgetName);
                                             hoverEnabled: hasPopup ? true : false;
                                             cursorShape: hasPopup ? Qt.PointingHandCursor : Qt.ArrowCursor;
                                             acceptedButtons: hasPopup ? Qt.LeftButton | Qt.RightButton : Qt.NoButton;
@@ -200,7 +216,7 @@ ShellRoot{
                                         sourceComponent: widgetLayout.getCurrentWidget(widgetName);
                                         MouseArea {
                                             anchors.fill: parent;
-                                            property bool hasPopup: !(widgetName === "weather" || widgetName === "workspace");
+                                            property bool hasPopup: widgetLayout.hasPopup(widgetName);
                                             hoverEnabled: hasPopup ? true : false;
                                             cursorShape: hasPopup ? Qt.PointingHandCursor : Qt.ArrowCursor;
                                             acceptedButtons: hasPopup ? Qt.LeftButton | Qt.RightButton : Qt.NoButton;

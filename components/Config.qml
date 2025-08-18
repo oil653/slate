@@ -19,13 +19,13 @@ Singleton{
     property bool isWorkspacesPerMonitor: adapter.isWorkspacesPerMonitor // If false all open worksapces will show on all monitors
 
     // Clock
-    property string dateFormat: adapter.dateFormat;
+    property string dateFormat: adapter.dateFormat; // Full list of format specifiers on wiki
 
     // Media
     property real mediaPlayerWidth: adapter.mediaPlayerWidth;
 
     // Notification
-    property int notifPopupTime: 5000; // How much time the popups should be shown
+    property int notifPopupTime: adapter.notifPopupTime; // How much time the popups should be shown
 
 
     function adapterReload(){
@@ -77,10 +77,11 @@ Singleton{
             property bool bottomRadius: true;
             property bool minimalWorkspace: false;
             property bool isWorkspacesPerMonitor: true;
-            property string dateFormat: "hh:mm <b>·</b> dddd, MMM d"; // Full list of format specifiers on wiki
+            property string dateFormat: "hh:mm <b>·</b> dddd, MMM d";
             property real rowSpacing: 10;
             property real mediaPlayerWidth: 200;
             property bool popupTopRadius: false;
+            property int notifPopupTime: 3000;
         }
         
     }

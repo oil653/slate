@@ -6,6 +6,7 @@
     "margin": 30,
     "mediaPlayerWidth": 200,
     "minimalWorkspace": false,
+    "notifPopupTime": 3000,
     "opacity": 1,
     "popupTopRadius": false,
     "radius": 15,

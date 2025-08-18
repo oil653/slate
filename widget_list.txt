@@ -2,7 +2,7 @@
 
 [✓] media [✓]; popup: media controls [✓]      todo: volume, jump to player, make dropdown menu prettier
 
-[✓] notification; todo: animations, appIcon
+[✓] notification/notif; todo: appIcon
 
 [✓] clock; todo: reminders connect with google/proton calendar?
 
@@ -14,4 +14,4 @@ metrics; popup: cpu, gpu, ram, storage stats
 
 weather
 
-system tray
+systemtray/systray

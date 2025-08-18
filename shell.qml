@@ -6,6 +6,7 @@ import qs
 import qs.components
 import qs.widgets
 import qs.modules
+import qs.services
 
 
 // Hello there
