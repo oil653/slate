@@ -14,4 +14,6 @@ metrics; popup: cpu, gpu, ram, storage stats
 
 weather
 
-systemtray/systray
+[✓] systemtray/systray
+
+keyboard lang
