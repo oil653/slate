@@ -43,7 +43,6 @@ PopupPos{
                 MouseArea{
                     anchors.fill: parent;
                     onClicked:{
-                        Swayctl.kybSwitch(modelData.layout, modelData.variant);
                         GlobalStates.selectedKybIndex= parent.index;
                         cursorShape: Qt.PointingHandCursor; 
                     }
