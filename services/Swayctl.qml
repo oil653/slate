@@ -54,12 +54,9 @@ Singleton{
         focus.exec(["bash", "-c", `swaymsg '[pid="${pid}"] focus'`])
     }
 
-    function kybLayout(name: string){
-        kybLayout.exec(["bash", "-c", `swaymsg input "*" xkb_layout ${name}`])
-    }
-
-    function kybVariant(name: string){
-        kybVariant.exec(["bash", "-c", `swaymsg input "*" xkb_variant ${name}`])
+    function kybSwitch(layout: string, variant: string){
+        kybVariant.exec(["bash", "-c", `swaymsg input "*" xkb_variant ${variant}`])
+        kybLayout.exec(["bash", "-c", `swaymsg input "*" xkb_layout ${layout}`])
     }
 
     Process{id: focus;}

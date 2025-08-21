@@ -1,8 +1,19 @@
 {
+    "autoKybApply": false,
     "bottomRadius": true,
     "dateFormat": "hh:mm <b>·</b> dddd, MMM d",
     "height": 30,
     "isWorkspacesPerMonitor": true,
+    "keyboard": [
+        {
+            "layout": "us",
+            "variant": "basic"
+        },
+        {
+            "layout": "hu",
+            "variant": "qwerty"
+        }
+    ],
     "margin": 30,
     "mediaPlayerWidth": 200,
     "minimalWorkspace": false,

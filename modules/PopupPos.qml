@@ -69,6 +69,15 @@ PanelWindow{
             contentItem.opacity = 0;
         }  
     }
-    color: "transparent"
-    exclusiveZone: 0
+    color: "transparent";
+    exclusiveZone: 0;
+
+    ClippingRectangle {
+        anchors.fill: parent;
+        color: Colors.surface0;
+
+        radius: 15;
+        topLeftRadius: Config.popupTopRadius ? 15 : 0;
+        topRightRadius: Config.popupTopRadius ? 15 : 0;
+    }
 }

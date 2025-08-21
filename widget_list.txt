@@ -16,4 +16,4 @@ weather
 
 [✓] systemtray/systray
 
-keyboard lang
+[✓] keyboard layout / variant 

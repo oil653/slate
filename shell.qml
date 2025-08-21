@@ -19,6 +19,7 @@ ShellRoot{
     NotifPopup{}
 
     Component.onCompleted: {
+        Swayctl.kybSwitch(Config.keyboard[0].layout, Config.keyboard[0].variant);
         if (root.configDebug) {
             console.log("configDebug enabled. Overwriting configs")
             Config.adapterOverwrite();

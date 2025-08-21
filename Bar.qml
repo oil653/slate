@@ -26,6 +26,10 @@ ShellRoot{
         active: GlobalStates.globalStatesContain("notif") || GlobalStates.globalStatesContain("notification");
         Notifications{}
     }
+    LazyLoader{
+        active: GlobalStates.globalStatesContain("kyb") || GlobalStates.globalStatesContain("keyboard");
+        KeyPopup{}
+    }
     Variants{
         model: Quickshell.screens;
         delegate: Component{
@@ -74,8 +78,15 @@ ShellRoot{
                         anchors.centerIn: parent;
                     }
                 }
+                Component{
+                    id: kybLoader;
+                    Key{
+                        anchors.centerIn: parent;
+                        implicitHeight: Config.height -2;    
+                    }
+                }
 
-                
+
                 Rectangle{
                     anchors.fill: parent;
 
@@ -94,11 +105,15 @@ ShellRoot{
                         anchors.rightMargin: Config.radius;
                         function getCurrentWidget(x) { // Returns the corresponding loader from the passed in string
                             switch (x) {
-                                case "workspace": return workspaceLoader;
+                                case "workspace" : return workspaceLoader;
                                 case "clock": return clockLoader;
                                 case "media": return mediaLoader;
-                                case "notif" || "notification" : return notifLoader;
-                                case "systray" || "systemtray" : return systrayLoader;
+                                case "notif" : return notifLoader;
+                                case "notification" : return notifLoader;
+                                case "systray" : return systrayLoader;
+                                case "systemtray" : return systrayLoader;
+                                case "kyb" : return kybLoader;
+                                case "keyboard": return kybLoader;
                                 default: return null;
                             }
                         }

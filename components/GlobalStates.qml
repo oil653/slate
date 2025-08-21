@@ -14,6 +14,8 @@ Singleton{
 
     property string middlePopup: "";
 
+    property int selectedKybIndex: 0; // The index of the selected keyboard in Config.keyboard 
+
     function globalStatesContain(panelName: string): bool {
         return (GlobalStates.leftPopup === panelName || GlobalStates.rightPopup === panelName || GlobalStates.middlePopup === panelName);
     }

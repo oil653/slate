@@ -27,6 +27,10 @@ Singleton{
     // Notification
     property int notifPopupTime: adapter.notifPopupTime; // How much time the popups should be shown
 
+    // Keyboard
+    // for a list of variant run: grep 'xkb_symbols' /usr/share/X11/xkb/symbols/<language/layout name> | grep -v 'default\|basic'
+    // Note that when slate is launched it sets the first keyboard state, so the first should be your main one
+    property var keyboard: adapter.keyboard;
 
     function adapterReload(){
         fileView.reload()
@@ -82,6 +86,17 @@ Singleton{
             property real mediaPlayerWidth: 200;
             property bool popupTopRadius: false;
             property int notifPopupTime: 3000;
+            property var keyboard: [
+                {
+                    layout: "us",
+                    variant: "basic" 
+                },
+                {
+                    layout: "hu",
+                    variant: "qwerty"
+                }
+            ]
+            property bool autoKybApply: false;
         }
         
     }
