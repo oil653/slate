@@ -20,7 +20,7 @@ Item{
             length: MediaController.activePlayer.length ?? 0;
             timestamp: MediaController.activePlayer.position ?? 0;
             IconImage{
-                visible: MediaController.activePlayer.canPause;
+                visible: MediaController.activePlayer.canPause ?? false;
                 anchors.centerIn: parent
                 source: !(MediaController.activePlayer.isPlaying) ? "root:assets/icons/play": "root:assets/icons/pause";
                 implicitSize: 20;
