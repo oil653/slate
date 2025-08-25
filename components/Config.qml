@@ -10,6 +10,7 @@ Singleton{
     property real radius: adapter.radius; // Radius of the main bar
     property bool bottomRadius: adapter.bottomRadius; // If set to true the bottom sides will have radius applyed
     property real rowSpacing: adapter.rowSpacing; // Spacing between the widgets
+    property real widgetHeight: adapter.widgetHeight; // Widgets sizes are calculated from the size of the panel - widgetHeight
     
     // Global 
     property bool popupTopRadius: adapter.popupTopRadius; // if set to true the popups will also have radius on the top. Reccomended to be the same as bottomRadius;
@@ -96,8 +97,7 @@ Singleton{
                     variant: "qwerty"
                 }
             ]
-            property bool autoKybApply: false;
+            property real widgetHeight: 5;
         }
-        
     }
 }

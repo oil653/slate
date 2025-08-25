@@ -13,6 +13,7 @@ Item{
     implicitWidth: implicitHeight;
     IconImage{
         id: icon;
+        anchors.centerIn: parent;
         implicitSize: parent.height;
         source: (Notif.hasUnseen) ? "root:assets/icons/bell_unread" :"root:assets/icons/bell"
         MouseArea{

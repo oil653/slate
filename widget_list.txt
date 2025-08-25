@@ -8,7 +8,7 @@
 
 home; popup: wifi, bluetooth, volume, system info, dnd, power button, media control, all system tray, weather
 
-batterty; popup: power mode, battery temp, cycles maybe others
+power; popup: power mode, battery temp, cycles maybe others
 
 metrics; popup: cpu, gpu, ram, storage stats
 

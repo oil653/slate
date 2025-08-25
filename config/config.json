@@ -1,5 +1,4 @@
 {
-    "autoKybApply": false,
     "bottomRadius": true,
     "dateFormat": "hh:mm <b>·</b> dddd, MMM d",
     "height": 30,
@@ -21,5 +20,6 @@
     "opacity": 1,
     "popupTopRadius": false,
     "radius": 15,
-    "rowSpacing": 10
+    "rowSpacing": 10,
+    "widgetHeight": 5
 }

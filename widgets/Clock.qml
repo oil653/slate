@@ -24,7 +24,7 @@ Item {
         Text {
             id: dateLabel;
             text: Qt.formatDateTime(root.selectedDate, Config.dateFormat);
-            font.pointSize: 12;
+            font.pixelSize: (Config.height - Config.widgetHeight) / 1.5;
             color: Colors.text;
         }
     }

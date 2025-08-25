@@ -1,6 +1,7 @@
 {
     "leftWidgetList": [
-        "clock"
+        "clock",
+        "power"
     ],
     "middleWidgetList": [
         "workspace",

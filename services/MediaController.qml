@@ -23,6 +23,13 @@ Singleton {
 
 	property var activeTrack;
 
+	Timer {
+        running: activePlayer.playbackState == MprisPlaybackState.Playing;
+        interval: 1000;
+        repeat: true;
+        onTriggered: activePlayer.positionChanged();
+    }
+
 	Instantiator {
 		model: Mpris.players;
 

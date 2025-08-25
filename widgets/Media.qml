@@ -10,14 +10,8 @@ import qs.modules
 
 Item{
     id: root;
-    implicitHeight: Config.height;
+    implicitHeight: Config.height - Config.widgetHeight;
     implicitWidth: 200;
-    Timer {
-        running: MediaController.activePlayer.playbackState == MprisPlaybackState.Playing;
-        interval: 1000;
-        repeat: true;
-        onTriggered: MediaController.activePlayer.positionChanged();
-    }
     Row{
         anchors.fill: parent;
         anchors.verticalCenter: parent.verticalCenter;

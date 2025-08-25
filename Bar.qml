@@ -47,34 +47,36 @@ ShellRoot{
                 Component{
                     id: workspaceLoader;
                     Workspace{
-                        implicitHeight: Config.height -2;
+                        anchors.centerIn: parent;
+                        implicitHeight: Config.height - Config.widgetHeight;
                         currentMonitor: (Config.isWorkspacesPerMonitor) ? panelRoot.modelData.name : "";
                     }
                 }
                 Component{
                     id: clockLoader;
                     Clock{
-                        implicitHeight: Config.height -2;
+                        anchors.centerIn: parent;
+                        implicitHeight: Config.height - Config.widgetHeight;
                     }
                 }
                 Component{
                     id: mediaLoader;
                     Media{
-                        implicitHeight: Config.height -2;
+                        implicitHeight: Config.height - Config.widgetHeight;
                         anchors.centerIn: parent;
                     }
                 }
                 Component{
                     id: notifLoader;
                     Bell{
-                        implicitHeight: Config.height -2;
+                        implicitHeight: Config.height - Config.widgetHeight;
                         anchors.centerIn: parent;
                     }
                 }
                 Component{
                     id: systrayLoader;
                     Systray{
-                        implicitHeight: Config.height;
+                        implicitHeight: Config.height - Config.widgetHeight;
                         anchors.centerIn: parent;
                     }
                 }
@@ -82,7 +84,14 @@ ShellRoot{
                     id: kybLoader;
                     Key{
                         anchors.centerIn: parent;
-                        implicitHeight: Config.height -2;    
+                        implicitHeight: Config.height - Config.widgetHeight;    
+                    }
+                }
+                Component{
+                    id: powerLoader;
+                    PowerWidget{
+                        anchors.centerIn: parent;
+                        implicitHeight: Config.height - Config.widgetHeight;    
                     }
                 }
 
@@ -108,12 +117,13 @@ ShellRoot{
                                 case "workspace" : return workspaceLoader;
                                 case "clock": return clockLoader;
                                 case "media": return mediaLoader;
-                                case "notif" : return notifLoader;
+                                case "notif":
                                 case "notification" : return notifLoader;
-                                case "systray" : return systrayLoader;
+                                case "systray":
                                 case "systemtray" : return systrayLoader;
-                                case "kyb" : return kybLoader;
+                                case "kyb":
                                 case "keyboard": return kybLoader;
+                                case "power" : return powerLoader;
                                 default: return null;
                             }
                         }
