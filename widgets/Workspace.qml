@@ -111,7 +111,7 @@ Rectangle{
                         id: workspaceText;
                         anchors.centerIn: parent;
                         text: workspace.model.name;
-                        font.pointSize: parent.height - 15;
+                        font.pixelSize: parent.height - (parent.height/4);
                         color: (parent.model.focused) ? bg.outlinedTextColor : (parent.model.active) ? bg.activeTextColor : (parent.model.urgent) ? bg.urgentTextColor : bg.textColor;
                         Behavior on color {  
                             ColorAnimation {  

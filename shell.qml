@@ -14,7 +14,7 @@ import qs.services
 
 ShellRoot{
     id: root;
-    property bool configDebug: false; // if set to true the config will always be overwritten if the qs is loaded or reloaded
+    property bool configDebug: true; // if set to true the config will always be overwritten if the qs is loaded or reloaded
     Bar{}
     NotifPopup{}
 
@@ -23,7 +23,7 @@ ShellRoot{
         
         if (root.configDebug) {
             console.log("configDebug enabled. Overwriting configs")
-            Config.adapterOverwrite();
+            // Config.adapterOverwrite();
             // Widgets.adapterOverwrite();
             // Colors.adapterOverwrite();
         }

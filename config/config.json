@@ -1,7 +1,7 @@
 {
     "bottomRadius": true,
     "dateFormat": "hh:mm <b>·</b> dddd, MMM d",
-    "height": 40,
+    "height": 30,
     "isWorkspacesPerMonitor": true,
     "keyboard": [
         {

@@ -8,9 +8,11 @@ import Quickshell.Io
 import Quickshell.Services.UPower
 
 Singleton{
-    property bool onBattery: UPower.onBattery;
+    // property bool onBattery: UPower.onBattery;
+    property bool onBattery: true;
     
     property var source: UPower.displayDevice
+    property bool sourceIsCharging: (source.changeRate > 0);
 
     property string batteryIcon: {
         if(!onBattery){
@@ -35,7 +37,12 @@ Singleton{
         if (prc === 100) return icon + "100";
         return icon + "alert";
     }
+    function isCharging(battery: var): bool{
+        return battery.changeRate > 0
+    }
+
+    
     Component.onCompleted: {
-        // if(source.ready){console.log("Currently used battery path:", source.percentage)}
+        // if(source.ready){console.log(source.percentage)}
     }
 }

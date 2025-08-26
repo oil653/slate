@@ -16,6 +16,7 @@ Singleton{
     property string text2: adapter.text2;
     property string red: adapter.red;
     property string yellow: adapter.yellow;
+    property string green: adapter.green;    
 
 
     function adapterReload(){
@@ -70,6 +71,7 @@ Singleton{
             property string text2: "#94e2d5";
             property string red: "#f38ba8";
             property string yellow: "#f9e2af";
+            property string green: "#a6e3a1";
         }
         
     }
