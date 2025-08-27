@@ -8,11 +8,11 @@ import Quickshell.Io
 import Quickshell.Services.UPower
 
 Singleton{
-    // property bool onBattery: UPower.onBattery;
-    property bool onBattery: true;
+    property bool onBattery: UPower.displayDevice;
+    // property bool onBattery: true;
     
-    property var source: UPower.displayDevice
-    property bool sourceIsCharging: (source.changeRate > 0);
+    property var source: UPower.displayDevice;
+    property bool sourceIsCharging: (source.state === UPowerDeviceState.Charging);
 
     property string batteryIcon: {
         if(!onBattery){
@@ -40,7 +40,19 @@ Singleton{
     function isCharging(battery: var): bool{
         return battery.changeRate > 0
     }
-
+    function formatTime(time) {
+        const hours = Math.floor(time / 3600);
+        const minutes = Math.floor((time % 3600) / 60);
+        const seconds = time % 60;
+        
+        if (hours > 0) {
+            return `${hours}:${minutes.toString().padStart(2, '0')}`;
+        } else if (minutes > 0) {
+            return `${minutes}m`;
+        } else {
+            return `${seconds}s`;
+        }
+    }
     
     Component.onCompleted: {
         // if(source.ready){console.log(source.percentage)}
