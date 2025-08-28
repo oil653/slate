@@ -74,7 +74,7 @@ PanelWindow{
 
     ClippingRectangle {
         anchors.fill: parent;
-        color: Colors.surface0;
+        color: Colors.background;
 
         radius: 15;
         topLeftRadius: Config.popupTopRadius ? 15 : 0;

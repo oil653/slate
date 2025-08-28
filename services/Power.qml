@@ -8,8 +8,7 @@ import Quickshell.Io
 import Quickshell.Services.UPower
 
 Singleton{
-    property bool onBattery: UPower.displayDevice;
-    // property bool onBattery: true;
+    property bool onBattery: UPower.onBattery;
     
     property var source: UPower.displayDevice;
     property bool sourceIsCharging: (source.state === UPowerDeviceState.Charging);
@@ -55,6 +54,6 @@ Singleton{
     }
     
     Component.onCompleted: {
-        // if(source.ready){console.log(source.percentage)}
+        // console.log(source)
     }
 }

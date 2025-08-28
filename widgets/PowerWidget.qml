@@ -22,7 +22,6 @@ ClippingRectangle{
         anchors.left: icon.right;
         anchors.leftMargin: 2;
 
-        property string texT:(Power.sourceIsCharging) ? Power.formatTime(Power.source.timeToFull) : Power.formatTime(Power.source.timeToEmpty); 
         text: Power.formatTime(Power.source.timeToFull + Power.source.timeToEmpty);
         color: (Power.sourceIsCharging) ? Colors.green : Colors.red;
         font.pixelSize: 20;

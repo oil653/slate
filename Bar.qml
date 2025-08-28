@@ -10,7 +10,7 @@ import qs.modules
 
 ShellRoot{
     id: root;
-    // Popup loader
+    // Popup loaders
     LazyLoader{
         active: GlobalStates.globalStatesContain("clock");
         Calendar{}
@@ -19,7 +19,7 @@ ShellRoot{
         active: GlobalStates.globalStatesContain("media");
         PopupPos{    
             implicitWidth: 400; implicitHeight: 120;
-            MediaControl{}
+            MediaControl{color: Colors.background;}
         }
     }
     LazyLoader{
@@ -29,6 +29,10 @@ ShellRoot{
     LazyLoader{
         active: GlobalStates.globalStatesContain("kyb") || GlobalStates.globalStatesContain("keyboard");
         KeyPopup{}
+    }
+    LazyLoader{
+        active: GlobalStates.globalStatesContain("power");
+        PowerPopup{}
     }
     Variants{
         model: Quickshell.screens;
