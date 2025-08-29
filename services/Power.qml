@@ -39,7 +39,7 @@ Singleton{
     function isCharging(battery: var): bool{
         return battery.changeRate > 0
     }
-    function formatTime(time) {
+    function formatTime(time: real): string {
         const hours = Math.floor(time / 3600);
         const minutes = Math.floor((time % 3600) / 60);
         const seconds = time % 60;
@@ -51,6 +51,31 @@ Singleton{
         } else {
             return `${seconds}s`;
         }
+    }
+    function deviceIcon(device: var): string{
+        const type = device.type;
+        const path = "root:assets/icons/devices/"
+        const typeMap = {
+            [UPowerDeviceType.Headphones]: "headphones",
+            [UPowerDeviceType.Headset]: "headset",
+            [UPowerDeviceType.Tablet]: "tablet",
+            [UPowerDeviceType.Phone]: "phone",
+            [UPowerDeviceType.Computer]: "pc",
+            [UPowerDeviceType.MediaPlayer]: "media_player",
+            [UPowerDeviceType.Ups]: "ups",
+            [UPowerDeviceType.Battery]: "battery",
+            [UPowerDeviceType.BluetoothGeneric]: "genericbl",
+            [UPowerDeviceType.GamingInput]: "controller",
+            [UPowerDeviceType.Wearable]: "wearable",
+            [UPowerDeviceType.Camera]: "camera",
+            [UPowerDeviceType.Keyboard]: "keyboard",
+            [UPowerDeviceType.Mouse]: "mouse",
+            [UPowerDeviceType.Touchpad]: "touchpad",
+            [UPowerDeviceType.Pen]: "pen",
+            [UPowerDeviceType.OtherAudio]: "other_audio"
+        };
+
+        return path + (typeMap[type] || "unknown");
     }
     
     Component.onCompleted: {
