@@ -7,7 +7,7 @@ import qs.widgets
 import qs.services
 
 ClippingRectangle{
-    implicitWidth: height + (Power.onBattery ? 50 : 0);
+    implicitWidth: height + (Power.onBattery ? 60 : 0);
     color: "transparent"
     IconImage{
         id: icon;

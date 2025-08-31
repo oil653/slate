@@ -17,6 +17,7 @@ ShellRoot{
     property bool configDebug: false; // if set to true the config will always be overwritten if the qs is loaded or reloaded
     Bar{}
     NotifPopup{}
+    VolumeIndicator{}
 
     Component.onCompleted: {
         Swayctl.kybSwitch(Config.keyboard[0].layout, Config.keyboard[0].variant);
