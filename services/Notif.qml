@@ -61,7 +61,7 @@ Singleton{
 
     // -------------------------------------------------------------------------------------------------------------------------------------------------------
     function addToGroup(notif) {  // Add to group or make new group
-        const appName = notif.appName;
+        let appName = notif.appName;
 
         if (!appName){
             appName = "unknown";

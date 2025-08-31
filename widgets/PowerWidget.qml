@@ -18,7 +18,7 @@ ClippingRectangle{
         // Rectangle{anchors.fill: parent}
     }
     Text{
-        visible: Power.onBattery;
+        visible: Power.onBattery && (Power.source.timeToFull + Power.source.timeToEmpty !==0);
         anchors.left: icon.right;
         anchors.leftMargin: 2;
 

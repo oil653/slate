@@ -21,5 +21,6 @@
     "popupTopRadius": false,
     "radius": 15,
     "rowSpacing": 10,
+    "scale": 1.1,
     "widgetHeight": 5
 }

@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Io
 
 Singleton{
+    property real scale: adapter.scale; // Scales of some popups
     property real height: adapter.height; // Panel height
     property real margin: adapter.margin // Panel margin from the side of the screens  
     property real opacity: adapter.opacity; // Opacity of the bar
@@ -98,6 +99,7 @@ Singleton{
                 }
             ]
             property real widgetHeight: 5;
+            property real scale: 1.2;
         }
     }
 }
