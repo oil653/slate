@@ -13,16 +13,15 @@ import qs.modules
 
 
 // It doesnt have the PopupPos because i want to use this in the home panel as a widget.
+ 
 
 Rectangle{
     id: rootrect;
     anchors.fill: parent;
-    color: Colors.surface0;
+    color: "transparent"
 
     
     radius: 15;
-    topLeftRadius: Config.popupTopRadius ? 15 : 0;
-    topRightRadius: Config.popupTopRadius ? 15 : 0;
 
     property real leftWidth: 2*(rootRect.width) - seperator; 
     property real seperator: 5
@@ -41,12 +40,15 @@ Rectangle{
 
     ClippingRectangle{ // Need the clipping rect for the radius
         id: rootRect;
+        
         anchors.left: parent.left;
         anchors.bottom: parent.bottom;
+        
         implicitWidth: parent.height;
         implicitHeight: parent.height;
-        topLeftRadius: Config.popupTopRadius ? 15 : 0;
+        topLeftRadius: 15;
         bottomLeftRadius: 15;
+
         color: rootrect.color;
         IconImage{
             anchors.fill: parent;

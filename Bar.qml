@@ -99,17 +99,21 @@ ShellRoot{
                     }
                 }
 
-
                 Rectangle{
                     anchors.fill: parent;
 
-                    color: Colors.background;
+                    color: Colors.background;                    
                     opacity: Config.opacity;
 
                     topLeftRadius: Config.radius;
                     topRightRadius: Config.radius;
                     bottomLeftRadius: Config.bottomRadius ? Config.radius : 0;
                     bottomRightRadius: Config.bottomRadius ? Config.radius : 0;
+                }
+                Rectangle{
+                    anchors.fill: parent;
+                    
+                    color: "transparent";
 
                     Item{
                         id: widgetLayout;

@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell.Widgets
-import Quickshell.Services.Mpris
+import Quickshell.Wayland
 import Quickshell
 import qs
 import qs.components
@@ -11,8 +11,11 @@ import qs.modules
 
 PanelWindow{
     // popup positioning, can be used for any popup
+    id: root;
 
     anchors.top: true;
+    margins.top: 5;
+
     anchors.left: (GlobalStates.leftPopup === "") ? false : true;
     anchors.right: (GlobalStates.rightPopup === "") ? false : true;
 
@@ -48,6 +51,7 @@ PanelWindow{
     margins.left: (isleftClamped) ? Config.margin/2 : calculatedleftMargin;
     margins.right: (isRightClamped) ? Config.margin/2 : calculatedRightMargin;
 
+    
     // ANIMATION
 
     // Set initial opacity to 0 for fade-in effect
@@ -72,12 +76,11 @@ PanelWindow{
     color: "transparent";
     exclusiveZone: 0;
 
-    ClippingRectangle {
+    Rectangle {
+        id: background
         anchors.fill: parent;
         color: Colors.background;
-
         radius: 15;
-        topLeftRadius: Config.popupTopRadius ? 15 : 0;
-        topRightRadius: Config.popupTopRadius ? 15 : 0;
+        opacity: 0.9;
     }
 }

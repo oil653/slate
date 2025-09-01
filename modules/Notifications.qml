@@ -10,23 +10,21 @@ import qs.modules
 
 PopupPos{
     id: root;
-    readonly property real defaultHeight: 300;
-    property real notificationPanelHeight: 0;
 
-    implicitHeight: defaultHeight + notificationPanelHeight; 
+    implicitHeight: 200; 
     implicitWidth: 250;
-Component.onCompleted: Notif.hasUnseen = false;
+    Component.onCompleted: Notif.hasUnseen = false;
     Item{ // Control panel
         id: controlPanel;
         anchors.top: parent.top;
         anchors.left: parent.left; anchors.right: parent.right;
         anchors.topMargin: 5; anchors.leftMargin: 5;
-        implicitHeight: 40;
+        implicitHeight: 30;
         Row{
             anchors.fill: parent;
             spacing: 5;
             ToggleIcon{ // Silent on off
-                implicitHeight: 40; implicitWidth: (parent.width-10) / 2; // -10 because of the two margin on the side
+                implicitHeight: controlPanel.height; implicitWidth: (parent.width-10) / 2; // -10 because of the two margin on the side
                 radius: 5;
                 onIcon: "root:assets/icons/bell_silent_on";
                 offIcon: "root:assets/icons/bell_silent_off";
@@ -34,7 +32,7 @@ Component.onCompleted: Notif.hasUnseen = false;
                 onToggle: Notif.isSilent = isOn;
             }
             ButtonIcon{ // Delete all
-                implicitHeight: 40; implicitWidth: (parent.width-10) / 2;
+                implicitHeight: controlPanel.height; implicitWidth: (parent.width-10) / 2;
                 radius: 5;
                 icon: "root:assets/icons/delete";
                 onPushed: Notif.removeAllNotification();
@@ -57,6 +55,7 @@ Component.onCompleted: Notif.hasUnseen = false;
                 anchors.fill: parent;
                 spacing: 5;
                 Repeater{ // =====================================================================
+                    id: groupRep;
                     model: ScriptModel{
                         values: [...Notif.groups];
                     }

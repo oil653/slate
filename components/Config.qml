@@ -11,10 +11,8 @@ Singleton{
     property real radius: adapter.radius; // Radius of the main bar
     property bool bottomRadius: adapter.bottomRadius; // If set to true the bottom sides will have radius applyed
     property real rowSpacing: adapter.rowSpacing; // Spacing between the widgets
-    property real widgetHeight: adapter.widgetHeight; // Widgets sizes are calculated from the size of the panel - widgetHeight
+    property real widgetHeight: adapter.widgetHeight; // Widgets sizes are calculated like bar height - widgetHeight
     
-    // Global 
-    property bool popupTopRadius: adapter.popupTopRadius; // if set to true the popups will also have radius on the top. Reccomended to be the same as bottomRadius;
 
     // Workspaces
     property bool minimalWorkspace: adapter.minimalWorkspace; // Defines the mode of the workspace 
@@ -86,7 +84,6 @@ Singleton{
             property string dateFormat: "hh:mm <b>·</b> dddd, MMM d";
             property real rowSpacing: 10;
             property real mediaPlayerWidth: 200;
-            property bool popupTopRadius: false;
             property int notifPopupTime: 3000;
             property var keyboard: [
                 {

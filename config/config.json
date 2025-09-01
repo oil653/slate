@@ -18,9 +18,8 @@
     "minimalWorkspace": false,
     "notifPopupTime": 3000,
     "opacity": 1,
-    "popupTopRadius": false,
     "radius": 15,
     "rowSpacing": 10,
-    "scale": 1.1,
+    "scale": 1,
     "widgetHeight": 5
 }

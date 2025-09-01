@@ -29,8 +29,9 @@ PopupPos{
                 color: GlobalStates.selectedKybIndex === index ? Colors.overlay0 : Colors.overlay1;
 
                 property bool isLast: index === rep.count -1;
-                topLeftRadius: (Config.popupTopRadius & index === 0) ? 15 : 0;
-                topRightRadius: (Config.popupTopRadius & index === 0) ? 15 : 0;
+
+                topLeftRadius: index === 0 ? 15 : 0;
+                topRightRadius: index === 0 ? 15 : 0;
 
                 bottomLeftRadius: isLast ? 15 : 0;
                 bottomRightRadius: isLast ? 15 : 0;

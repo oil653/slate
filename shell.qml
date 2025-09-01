@@ -24,7 +24,7 @@ ShellRoot{
         
         if (root.configDebug) {
             console.log("configDebug enabled. Overwriting configs")
-            // Config.adapterOverwrite();
+            Config.adapterOverwrite();
             // Widgets.adapterOverwrite();
             // Colors.adapterOverwrite();
         }
