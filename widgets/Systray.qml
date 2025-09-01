@@ -24,7 +24,7 @@ Item{
                     property bool isCritical: modelData.status === 2;
                     property bool isPassive: modelData.status === 0;
 
-                    visible: isPassive;
+                    visible: isPassive && !Config.showAllTray;
                     height: root.height;
                     width: root.height;
                     radius: 20;

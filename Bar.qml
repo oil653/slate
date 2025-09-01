@@ -144,6 +144,17 @@ ShellRoot{
                             let list = ["weather", "workspace", "systray", "systemtray"];
                             return !list.some(element => element === widgetName);
                         }
+                        function clearPopups(skip: string){ // Skip is if we it needs to not clear one
+                            if (skip !== "left"){
+                                GlobalStates.leftPopup = "";
+                            }
+                            if (skip !== "middle"){
+                                GlobalStates.middlePopup = "";
+                            }
+                            if (skip !== "right"){
+                                GlobalStates.rightPopup = "";
+                            }
+                        }
 
                         Row { // Left panel
                             id: leftPanel;
@@ -169,11 +180,11 @@ ShellRoot{
                                             cursorShape: hasPopup ? Qt.PointingHandCursor : Qt.ArrowCursor;
                                             acceptedButtons: hasPopup ? Qt.LeftButton | Qt.RightButton : Qt.NoButton;
                                             onClicked: {
+                                                // Clear all the other popups
+                                                widgetLayout.clearPopups((GlobalStates.leftPopup === widgetName) ? "left" : "");
+
                                                 GlobalStates.leftPopup = (GlobalStates.leftPopup === "") ? widgetName : "";
                                                 GlobalStates.leftPopupCallerIndex = index;
-                                                // Clear all the other popups
-                                                GlobalStates.middlePopup = "";
-                                                GlobalStates.rightPopup = "";
 
                                                 widgetLayout.popupDebugPrint();
                                             }
@@ -210,13 +221,11 @@ ShellRoot{
                                             cursorShape: hasPopup ? Qt.PointingHandCursor : Qt.ArrowCursor;
                                             acceptedButtons: hasPopup ? Qt.LeftButton | Qt.RightButton : Qt.NoButton;
                                             onClicked: {
+                                                // Clear all the other popup
+                                                widgetLayout.clearPopups((GlobalStates.middlePopup === widgetName) ? "middle" : "");
+
                                                 // Set the middle popup to the correct element
                                                 GlobalStates.middlePopup = (GlobalStates.middlePopup === "") ? widgetName : "";
-                                                // Clear all the other popup
-                                                GlobalStates.leftPopup = "";
-                                                GlobalStates.leftPopupAnchor = false;
-                                                GlobalStates.rightPopup = "";
-                                                GlobalStates.rightPopupAnchor = false;
 
                                                 widgetLayout.popupDebugPrint();
                                             }
@@ -254,11 +263,11 @@ ShellRoot{
                                             cursorShape: hasPopup ? Qt.PointingHandCursor : Qt.ArrowCursor;
                                             acceptedButtons: hasPopup ? Qt.LeftButton | Qt.RightButton : Qt.NoButton;
                                             onClicked: {
+                                                // Clear all the other popups
+                                                widgetLayout.clearPopups((GlobalStates.rightPopup === widgetName) ? "right" : "");
+
                                                 GlobalStates.rightPopup = (GlobalStates.rightPopup === "") ? widgetName : "";
                                                 GlobalStates.rightPopupCallerIndex = index;
-                                                // Clear all the other popups
-                                                GlobalStates.middlePopup = "";
-                                                GlobalStates.leftPopup = "";
 
                                                 widgetLayout.popupDebugPrint();
                                             }

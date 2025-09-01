@@ -7,12 +7,15 @@ Singleton{
     property real scale: adapter.scale; // Scales of some popups
     property real height: adapter.height; // Panel height
     property real margin: adapter.margin // Panel margin from the side of the screens  
-    property real opacity: adapter.opacity; // Opacity of the bar
+    property real opacity: adapter.opacity; // Opacity of the bar background
     property real radius: adapter.radius; // Radius of the main bar
     property bool bottomRadius: adapter.bottomRadius; // If set to true the bottom sides will have radius applyed
     property real rowSpacing: adapter.rowSpacing; // Spacing between the widgets
     property real widgetHeight: adapter.widgetHeight; // Widgets sizes are calculated like bar height - widgetHeight
     
+    // Popups general
+    property bool closeOnOutclick: adapter.closeOnOutclick; // If the popups should close if the user click outside the popups
+    property real popupAnimationTime: adapter.popupAnimationTime; // Defines how long should the animation on popups be
 
     // Workspaces
     property bool minimalWorkspace: adapter.minimalWorkspace; // Defines the mode of the workspace 
@@ -22,16 +25,21 @@ Singleton{
     property string dateFormat: adapter.dateFormat; // Full list of format specifiers on wiki
 
     // Media
-    property real mediaPlayerWidth: adapter.mediaPlayerWidth;
+    property real mediaPlayerWidth: adapter.mediaPlayerWidth; // The width of the player
 
     // Notification
-    property int notifPopupTime: adapter.notifPopupTime; // How much time the popups should be shown
+    property int notifPopupTime: adapter.notifPopupTime; // How much time the notification popups should be shown
 
     // Keyboard
     // for a list of variant run: grep 'xkb_symbols' /usr/share/X11/xkb/symbols/<language/layout name> | grep -v 'default\|basic'
     // Note that when slate is launched it sets the first keyboard state, so the first should be your main one
     property var keyboard: adapter.keyboard;
 
+    // Systray
+    property bool showAllTray: adapter.showAllTray; // If set to true all systrays will be show (even if it reports that is shouldnt be visible), some apps doesnt report they status correctly
+
+
+    // ====================
     function adapterReload(){
         fileView.reload()
     }
@@ -97,6 +105,9 @@ Singleton{
             ]
             property real widgetHeight: 5;
             property real scale: 1.2;
+            property bool closeOnOutclick: true;
+            property real popupAnimationTime: 150;
+            property bool showAllTray: false;
         }
     }
 }

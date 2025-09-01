@@ -1,5 +1,6 @@
 {
     "bottomRadius": true,
+    "closeOnOutclick": true,
     "dateFormat": "hh:mm <b>·</b> dddd, MMM d",
     "height": 30,
     "isWorkspacesPerMonitor": true,
@@ -18,8 +19,10 @@
     "minimalWorkspace": false,
     "notifPopupTime": 3000,
     "opacity": 1,
+    "popupAnimationTime": 150,
     "radius": 15,
     "rowSpacing": 10,
-    "scale": 1,
+    "scale": 1.2,
+    "showAllTray": false,
     "widgetHeight": 5
 }
